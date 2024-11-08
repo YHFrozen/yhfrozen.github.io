@@ -1286,7 +1286,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #d48250;
+    background: #11dfb8;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2895,4 +2895,10 @@ body {
 .footer-inner {
   opacity: 0.8;
   color: #fff;
+}
+blockquote {
+  color: #cdb4b4;
+}
+a {
+  color: #a4a0f2;
 }
