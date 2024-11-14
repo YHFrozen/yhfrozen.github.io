@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Welcome to YHFrozen&#39;s Blog</title>
-    <url>/2024/11/07/%E7%AC%AC%E4%B8%80%E7%AF%87blog/</url>
-    <content><![CDATA[<h3 id="My-First-Blog"><a href="#My-First-Blog" class="headerlink" title="My First Blog"></a>My First Blog</h3><p>忙碌了一整天，终于初步配置好了自己的blog网站。感谢石大佬的悉心教导！！！当然发现页面依旧十分枯燥，想着加一些元素，结果越加越乱。不过还好一统乱搞，感觉现在看起来还不错。我会在接下来考完期中后继续改善我的网站。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <tags>
-        <tag>dailylife</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工程伦理复习</title>
     <url>/2024/11/08/%E5%B7%A5%E7%A8%8B%E4%BC%A6%E7%90%86%E5%A4%8D%E4%B9%A0/</url>
     <content><![CDATA[<blockquote>
@@ -340,6 +331,15 @@
       </categories>
       <tags>
         <tag>preview-source</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Welcome to YHFrozen&#39;s Blog</title>
+    <url>/2024/11/07/%E7%AC%AC%E4%B8%80%E7%AF%87blog/</url>
+    <content><![CDATA[<h3 id="My-First-Blog"><a href="#My-First-Blog" class="headerlink" title="My First Blog"></a>My First Blog</h3><p>忙碌了一整天，终于初步配置好了自己的blog网站。感谢石大佬的悉心教导！！！当然发现页面依旧十分枯燥，想着加一些元素，结果越加越乱。不过还好一统乱搞，感觉现在看起来还不错。我会在接下来考完期中后继续改善我的网站。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <tags>
+        <tag>dailylife</tag>
       </tags>
   </entry>
 </search>

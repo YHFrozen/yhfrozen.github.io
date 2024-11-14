@@ -1286,7 +1286,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #11dfb8;
+    background: #d5e9ff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2900,5 +2900,11 @@ blockquote {
   color: #cdb4b4;
 }
 a {
-  color: #a4a0f2;
+  color: #1027b8;
+}
+.site-state-item-count {
+  color: #160aff;
+}
+.site-description {
+  color: #983535;
 }
