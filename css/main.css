@@ -1286,7 +1286,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #faabff;
+    background: #a3d75d;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1689,6 +1689,12 @@ pre code {
   color: #f00;
   display: inline-block;
   margin: 0 5px;
+}
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
 }
 @keyframes icon-animate {
   0%, 100% {
@@ -2124,6 +2130,9 @@ pre code {
   flex-basis: 100%;
   height: 0;
 }
+#busuanzi_container_page_pv {
+  display: none;
+}
 .post-nav {
   border-top: 1px solid #eee;
   display: flex;
@@ -2539,6 +2548,13 @@ mark.search-keyword {
   color: #ff2a2a;
   font-weight: bold;
 }
+mjx-container[jax='CHTML'][display='true'],
+.has-jax {
+  overflow: auto hidden;
+}
+mjx-container[display='true'] + br {
+  display: none;
+}
 .use-motion .animated {
   animation-fill-mode: none;
   visibility: inherit;
@@ -2908,11 +2924,17 @@ blockquote {
   color: #cdb4b4;
 }
 a {
-  color: #8d9aff;
+  color: #7584ff;
 }
 .site-state-item-count {
   color: #160aff;
 }
 .site-description {
   color: #983535;
+}
+.post-meta-item {
+  color: #b8cade;
+}
+.post-title-link span {
+  color: #b8cade;
 }
