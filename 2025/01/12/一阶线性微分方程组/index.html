@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="一阶线性微分方程组">
+<meta property="og:url" content="http://yhfrozen.github.io/2025/01/12/%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-12T13:21:37.000Z">
+<meta property="article:modified_time" content="2025-01-12T14:45:11.630Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="理论技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2025/01/12/%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2025/01/12/%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84/","path":"2025/01/12/一阶线性微分方程组/","title":"一阶线性微分方程组"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一阶线性微分方程组 | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">线性微分方程组的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">线性微分方程组的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">矩阵函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.2.</span> <span class="nav-text">矩阵函数的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.</span> <span class="nav-text">向量值函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">线性微分方程组的解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E7%9A%84%E5%AD%98%E5%9C%A8%E5%94%AF%E4%B8%80%E6%80%A7%E5%AE%9A%E7%90%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">解的存在唯一性定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">1.2.3.</span> <span class="nav-text">齐次线性微分方程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="nav-number">1.2.4.</span> <span class="nav-text">线性相关与线性无关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wronski%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.2.5.</span> <span class="nav-text">Wronski行列式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#liouville%E5%85%AC%E5%BC%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">Liouville公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%90%86-1"><span class="nav-number">1.2.7.</span> <span class="nav-text">定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">非齐次线性微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">定理：非齐次线性微分方程组解的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%90%86%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E7%89%B9%E8%A7%A3"><span class="nav-number">1.3.2.</span> <span class="nav-text">定理：非齐次线性微分方程组的特解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">常系数线性微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.1.</span> <span class="nav-text">常系数齐次微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#boldsymbola-%E6%9C%89-n-%E4%B8%AA%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3%E7%9A%84%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">(1) \(\boldsymbol{A}\) 有 \(n\) 个线性无关的特征向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boldsymbola-%E6%B2%A1%E6%9C%89-n-%E4%B8%AA%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3%E7%9A%84%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">(2) \(\boldsymbol{A}\) 没有 \(n\) 个线性无关的特征向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">求微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3"><span class="nav-number">2.1.0.4.1.</span> <span class="nav-text">解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boldsymbola%E6%9C%89%E5%A4%8D%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">\(\boldsymbol{A}\)有复特征值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E7%90%86-2"><span class="nav-number">2.1.0.5.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-number">2.1.0.5.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3-1"><span class="nav-number">2.1.0.5.3.</span> <span class="nav-text">解</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">2.1.0.5.3.1.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.1.0.6.</span> <span class="nav-text">求解微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.1.0.6.1.</span> <span class="nav-text">解法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%9D%9E%E9%BD%90%E6%AC%A1%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.2.</span> <span class="nav-text">常系数非齐次微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E7%90%86-3"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%B1%82%E8%A7%A3%E9%9D%9E%E9%BD%90%E6%AC%A1%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">例题：求解非齐次微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95-1"><span class="nav-number">2.2.0.2.1.</span> <span class="nav-text">解法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jordan%E6%A0%87%E5%87%86%E5%BD%A2%E4%B8%8E%E5%B8%B8%E7%B3%BB%E6%95%B0%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">Jordan标准形与常系数线性微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86jordan-%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-number">3.1.</span> <span class="nav-text">前置知识：Jordan 标准形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jordan-%E5%9D%97"><span class="nav-number">3.1.1.</span> <span class="nav-text">Jordan 块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89jordan-%E5%9D%97"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">定义：Jordan 块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jordan-%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-number">3.1.2.</span> <span class="nav-text">Jordan 标准形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89jordan-%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">定义：Jordan 标准形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E7%90%86jordan-%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">定理：Jordan 标准化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%B3%BB%E6%95%B0%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">3.2.</span> <span class="nav-text">常系数一阶线性微分方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%8C%87%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">矩阵指数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E7%90%86-4"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-1"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%AF%B9%E8%A7%92%E5%8C%96%E7%9A%84%E6%83%85%E5%BD%A2"><span class="nav-number">3.2.2.</span> <span class="nav-text">可对角化的情形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%96-jordan-%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-number">3.2.3.</span> <span class="nav-text">化 Jordan 标准形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E9%80%9A%E8%A7%A3"><span class="nav-number">3.2.3.1.1.</span> <span class="nav-text">求线性微分方程组的通解：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94"><span class="nav-number">3.2.3.1.2.</span> <span class="nav-text">解答：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2025/01/12/%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一阶线性微分方程组 | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一阶线性微分方程组
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-12 21:21:37 / 修改时间：22:45:11" itemprop="dateCreated datePublished" datetime="2025-01-12T21:21:37+08:00">2025-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">学习资料</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<h1 id="线性微分方程组的基本概念">线性微分方程组的基本概念</h1>
+<h2 id="线性微分方程组的定义">线性微分方程组的定义</h2>
+<h3 id="矩阵函数">矩阵函数</h3>
+<p>定义：<br />
+<span class="math inline">\(\boldsymbol{A}(t)=(a_{ij}(t))_{n \times m},
+t \in \boldsymbol{I}\)</span>，其中 <span
+class="math inline">\((a_{ij}(t))_{n \times m}\)</span> 为 <span
+class="math inline">\(\boldsymbol{I}\)</span> 上的函数。</p>
+<ul>
+<li>若所有函数 <span class="math inline">\(a_{ij}\)</span> 均在区间
+<span class="math inline">\(\boldsymbol{I}\)</span> 上连续，则称矩阵函数
+<span class="math inline">\(\boldsymbol{A}(t)\)</span> 在区间 <span
+class="math inline">\(\boldsymbol{I}\)</span> 上连续。</li>
+<li>若 <span class="math inline">\(a_{ij}(t)\)</span> 在区间 <span
+class="math inline">\(\boldsymbol{I}\)</span>
+上可导（可积），则称矩阵函数 <span
+class="math inline">\(\boldsymbol{A}(t)\)</span> 在区间 <span
+class="math inline">\(\boldsymbol{I}\)</span> 上可导（可积）。</li>
+</ul>
+<h3 id="矩阵函数的运算">矩阵函数的运算</h3>
+<p>[ = (t) = (a_{ij}(t))<em>{n m} = ( </em>{a}^{b} a_{ij}(t) t )_{n m}
+]</p>
+<p>容易验证矩阵函数的导数满足如下法则：</p>
+<ul>
+<li><span
+class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}t}(\boldsymbol{CA}) =
+\boldsymbol{C}
+\frac{\mathrm{d}\boldsymbol{A}}{\mathrm{d}t}\)</span>，其中 <span
+class="math inline">\(\boldsymbol{C}\)</span> 是可与 <span
+class="math inline">\(\boldsymbol{A}\)</span> 相乘的常数矩阵；</li>
+<li><span
+class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}t}(\boldsymbol{A} \pm
+\boldsymbol{B}) = \frac{\mathrm{d}\boldsymbol{A}}{\mathrm{d}t} \pm
+\frac{\mathrm{d}\boldsymbol{B}}{\mathrm{d}t}\)</span>；</li>
+<li><span
+class="math inline">\(\frac{\mathrm{d}}{\mathrm{d}t}(\boldsymbol{A}
+\cdot \boldsymbol{B}) = \boldsymbol{A} \cdot
+\frac{\mathrm{d}\boldsymbol{B}}{\mathrm{d}t} + \boldsymbol{B} \cdot
+\frac{\mathrm{d}\boldsymbol{A}}{\mathrm{d}t}\)</span>。</li>
+</ul>
+<h3 id="向量值函数">向量值函数</h3>
+<p>定义：<br />
+<span class="math inline">\(\boldsymbol{x}(t)=(x_1(t), \dots,
+x_n(t))^{T}\)</span>
+可以看成一个列矩阵，是上述的一个特例，因此可以使用上述运算法则。例如：<br />
+<span
+class="math inline">\(\frac{\mathrm{d}\boldsymbol{x}(t)}{\mathrm{d}t} =
+(\dot{x_1}(t), \dots, \dot{x_n}(t))^{T}\)</span>。</p>
+<p>那么我们就得到了线性微分方程组的向量形式： [ = (t) (t) + (t) ] 当
+<span class="math inline">\(\boldsymbol{f}(t) \equiv 0\)</span>
+时，上式变为： [ = (t) (t) ] 称为
+<strong>齐次线性微分方程组</strong>。<br />
+当 <span class="math inline">\(\boldsymbol{f}(t) \neq
+\boldsymbol{0}\)</span> 时，称上式为
+<strong>非齐次线性微分方程组</strong>。</p>
+<h2 id="线性微分方程组的解">线性微分方程组的解</h2>
+由于方程组的左端由 <span class="math inline">\(\boldsymbol{x}\)</span>
+的 <span class="math inline">\(n\)</span>
+个分量的导数组成，则它的解中可以含有 <span
+class="math inline">\(n\)</span>
+个独立的任意常数，并称这样的解为方程组的
+<strong>通解</strong>，不含任意常数的则称为
+<strong>特解</strong>。<br />
+要确定通解中的 <span class="math inline">\(n\)</span> 个任意常数，需要
+<span class="math inline">\(n\)</span>
+个独立的附加条件（定解条件）。若定解条件是由函数 <span
+class="math inline">\(\boldsymbol{x}(t)\)</span> 在一点 <span
+class="math inline">\(t = t_0\)</span> 处的值给出：<br />
+<span class="math inline">\(\boldsymbol{x}(t_0) = \boldsymbol{x_0} =
+(x_{0,1}, \dots,
+x_{0,n})^{T}\)</span>，则此条件称为初值条件，即求解如下方程组： [ {
+<span class="math display">\[\begin{array}{l}
+\frac{\mathrm{d} \boldsymbol{x} (t)}{\mathrm{d}t} = \boldsymbol{A}(t)
+\boldsymbol{x}(t) + \boldsymbol{f}(t), \\
+\boldsymbol{x}(t_0) = \boldsymbol{x}_0
+\end{array}\]</span>
+<p>. ] 该问题称为 <strong>初值问题</strong>，或
+<strong>Cauchy问题</strong>。它与方程式一样有类似的性质：</p>
+<h3 id="解的存在唯一性定理">解的存在唯一性定理</h3>
+<p>当系数矩阵 <span class="math inline">\(\boldsymbol{A}(t)\)</span>
+与非齐次项 <span class="math inline">\(\boldsymbol{f}(t)\)</span> 在
+<span class="math inline">\((a, b)\)</span> 内连续时，初值问题的解在
+<span class="math inline">\((a, b)\)</span> 内是存在且唯一的。</p>
+<p>由此我们有以下结论：</p>
+<h3 id="定理">定理</h3>
+<p>线性微分方程组满足初始条件： [ (t_0) = ] 的解 <span
+class="math inline">\(\boldsymbol{x} = \boldsymbol{x}(t)\)</span> 在区间
+<span class="math inline">\((a,b)\)</span> 上是存在且唯一的，其中初值
+<span class="math inline">\(t_0 \in (a,b)\)</span> 和 <span
+class="math inline">\(\boldsymbol{x_0} \in \mathbb{R}^{n}\)</span>
+是任意给定的。</p>
+<h3 id="齐次线性微分方程组">齐次线性微分方程组</h3>
+<ol type="1">
+<li><span class="math inline">\(\boldsymbol{x}(t) \equiv
+\boldsymbol{0}\)</span> 是方程组的解，称为 <strong>平凡解</strong> 或
+<strong>零解</strong>；</li>
+<li>若方程组的解 <span class="math inline">\(\boldsymbol{x}(t)\)</span>
+满足初值条件 <span class="math inline">\(\boldsymbol{x}(t_0) =
+\boldsymbol{0}\)</span>，则由解的存在唯一性定理可知必有 <span
+class="math inline">\(\boldsymbol{x}(t) \equiv
+\boldsymbol{0}\)</span>；</li>
+<li>若 <span class="math inline">\(\boldsymbol{x}_i(t) \ (i = 1, \dots,
+n, t \in (a, b))\)</span> 均为方程组的解， <span
+class="math inline">\(C_1, \dots, C_n\)</span> 皆为常数，则其线性组合
+<span class="math inline">\(\sum_{i=1}^{n} C_i \boldsymbol{x}_i(t) \quad
+(t \in (a,b))\)</span> 也是方程组的解。</li>
+</ol>
+<h3 id="线性相关与线性无关">线性相关与线性无关</h3>
+<p>当在区间 <span class="math inline">\((a, b)\)</span>
+上的向量函数满足以下条件时： [ c_1 _1(x) + c_2 _2(x) + + c_m _m(x) , (a,
+b) ] 其中 <span class="math inline">\(c_1, c_2, \dots, c_m\)</span>
+为不全为零的任意常数，那么我们称 <span
+class="math inline">\(\boldsymbol{\phi}_1(x), \boldsymbol{\phi}_2(x),
+\dots, \boldsymbol{\phi}_m(x)\)</span> 为
+<strong>线性相关</strong>，否则，称为 <strong>线性无关</strong>。</p>
+<p>我们知道方程组的通解由 <span class="math inline">\(n\)</span>
+个线性无关的向量构成一个解空间（线性无关与线性相关的概念参考线性代数的内容）。我们称这样的解为
+<strong>基本解组</strong>，以这些解的分量构成的矩阵称为方程组的
+<strong>基解矩阵</strong>，记为： [ (t) = = (_1(t), , _n(t)) ]</p>
+<p>利用基解矩阵可将方程组的通解表示为： [ (t) = (t), t (a,b) ] 其中
+<span class="math inline">\(\boldsymbol{C} = (C_1, \dots,
+C_n)^{T}\)</span> 是由任意常数构成的常向量。</p>
+<p>由此可见，求解齐次线性微分方程组的关键就是求出其基解矩阵，也就是
+<span class="math inline">\(n\)</span> 个线性无</p>
+<p>关的特解。我们有下列简单的线性无关的判别法：</p>
+<h3 id="wronski行列式">Wronski行列式</h3>
+<p>由 <span class="math inline">\(n\)</span> 个 <span
+class="math inline">\(n\)</span> 维向量值函数 <span
+class="math inline">\(\boldsymbol{x}_i(t) \ (t \in \boldsymbol{I}, i =
+1, 2, \dots, n)\)</span> 的分量 <span
+class="math inline">\(x_{ij}\)</span> （<span class="math inline">\(i,j
+= 1, 2, \dots, n\)</span>）依次为列所构成的行列式，称为这 <span
+class="math inline">\(n\)</span> 个向量值函数的
+<strong>Wronski行列式</strong>，记作 <span class="math inline">\(W(t) =
+\det(x_{ij}(t)), t \in \boldsymbol{I}\)</span>。</p>
+[ W(t) = |
+<span class="math display">\[\begin{array}{cccc}
+x_{11}(t) &amp; x_{12}(t) &amp; \cdots &amp; x_{1n}(t) \\
+x_{21}(t) &amp; x_{22}(t) &amp; \cdots &amp; x_{2n}(t) \\
+\ldots &amp; \ldots &amp; \vdots &amp; \ldots \\
+x_{n1}(t) &amp; x_{n2}(t) &amp; \cdots &amp; x_{nn}(t)
+\end{array}\]</span>
+<p>| ]</p>
+<h3 id="liouville公式">Liouville公式</h3>
+<p>如果 Wronski 行列式 <span class="math inline">\(W(t)\)</span> 满足：
+[ W(t) = W(t_0) ( <em>{t_0}^{t} () , ), a &lt; t_0, t &lt; b ] 其中： [
+(t) = </em>{i=1}^n a_{ii}(t) ] 为矩阵 <span
+class="math inline">\(\boldsymbol{A}(t)\)</span> 的迹。</p>
+<p>由上述定理可知，Wronski 行列式 <span
+class="math inline">\(W(t)\)</span> 在区间 <span
+class="math inline">\((a, b)\)</span> 上只有两种可能，恒为 <span
+class="math inline">\(0\)</span> 或恒不为 <span
+class="math inline">\(0\)</span>。</p>
+<h3 id="定理-1">定理</h3>
+<p>齐次微分方程组的 <span class="math inline">\(n\)</span> 个解 <span
+class="math inline">\(\boldsymbol{x}_i(t) \ (i=1, 2, \dots, n)\)</span>
+在 <span class="math inline">\((a,b)\)</span>
+内线性无关的充要条件是存在一点 <span class="math inline">\(t_0 \in (a,
+b)\)</span>，使得这 <span class="math inline">\(n\)</span> 个解的
+Wronski 行列式在 <span class="math inline">\(t_0\)</span> 处的值 <span
+class="math inline">\(W(t_0) \neq 0\)</span>。</p>
+<p>接下来我们来看基解矩阵所具有的性质：</p>
+<ol type="1">
+<li>基解矩阵 <span class="math inline">\(\boldsymbol{X}(t)\)</span>
+满足矩阵方程： [ = (t) ]</li>
+<li>若 <span class="math inline">\(\boldsymbol{X}(t)\)</span> 是方程组在
+<span class="math inline">\((a,b)\)</span> 内的任一基解矩阵，<span
+class="math inline">\(\boldsymbol{B}\)</span> 是任一 <span
+class="math inline">\(n\)</span> 阶非奇异常数矩阵，则 <span
+class="math inline">\(\boldsymbol{X}(t) \boldsymbol{B}\)</span>
+也是方程组在 <span class="math inline">\((a,b)\)</span>
+内的一个基解矩阵。</li>
+<li>若 <span class="math inline">\(\boldsymbol{X}(t)\)</span> 与 <span
+class="math inline">\(\boldsymbol{X}^*(t)\)</span> 是方程组在 <span
+class="math inline">\((a,b)\)</span> 内的任意两个基解矩阵，则必存在一个
+<span class="math inline">\(n\)</span> 阶非奇异常数矩阵 <span
+class="math inline">\(\boldsymbol{B}\)</span>，使得： [ (t) = ^*(t) , t
+(a,b) ]</li>
+</ol>
+<h2 id="非齐次线性微分方程组">非齐次线性微分方程组</h2>
+<h3
+id="定理非齐次线性微分方程组解的结构">定理：非齐次线性微分方程组解的结构</h3>
+<p>非齐次线性微分方程组的任一解 <span
+class="math inline">\(\boldsymbol{x}(t)\)</span> 可以表示为它的任一特解
+<span class="math inline">\(\boldsymbol{x}^{*}(t)\)</span>
+与它所对应的齐次线性微分方程组的通解之和，即：</p>
+<p>[ (t) = (t) + ^{*}(t), t (a,b) ]</p>
+<h3
+id="定理非齐次线性微分方程组的特解">定理：非齐次线性微分方程组的特解</h3>
+<p>设 <span class="math inline">\(\boldsymbol{X}(t)\)</span>
+是齐次线性微分方程组的一个基解矩阵，则非齐次线性微分方程组的特解为：</p>
+<p>[ ^{*}(t) = (t) _{t_0}^{t} ^{-1}() () , , t (a,b) ]</p>
+<p>因此，非齐次线性微分方程组的通解为：</p>
+<p>[ (t) = (t) + (t) _{t_0}^{t} ^{-1}() () , ]</p>
+<p>代入初值条件 <span class="math inline">\(\boldsymbol{x}(t_0) =
+\boldsymbol{x}_0\)</span> 可得特解：</p>
+<p>[ (t) = (t) ^{-1}(t_0) <em>0 + (t) </em>{t_0}^{t} ^{-1}() () , ]</p>
+<h1 id="常系数线性微分方程组">常系数线性微分方程组</h1>
+<p>当微分方程组的系数为常数时，称该方程组为常系数线性微分方程组。其矩阵形式为：</p>
+<p>[ = ]</p>
+<h2 id="常系数齐次微分方程组">常系数齐次微分方程组</h2>
+<p>常系数齐次微分方程组的形式为：</p>
+<p>[ = ]</p>
+<p>通过待定系数法，可以设解为 <span class="math inline">\(\boldsymbol{x}
+= \boldsymbol{r} e^{\lambda t}\)</span>，代入方程中得到：</p>
+<p>[ = ( - ) = 0 ]</p>
+<p>这表明方程组的解为 <span
+class="math inline">\(\boldsymbol{A}\)</span>
+的特征值和对应的特征向量。</p>
+<h4 id="boldsymbola-有-n-个线性无关的特征向量">(1) <span
+class="math inline">\(\boldsymbol{A}\)</span> 有 <span
+class="math inline">\(n\)</span> 个线性无关的特征向量</h4>
+<p>当矩阵 <span class="math inline">\(\boldsymbol{A}\)</span> 有 <span
+class="math inline">\(n\)</span> 个线性无关的特征向量时，可以对角化
+<span
+class="math inline">\(\boldsymbol{A}\)</span>。此时，基解矩阵为：</p>
+<p>[ (t) = ( _1 e^{_1 t}, _2 e^{_2 t}, , _n e^{_n t} ) ]</p>
+<p>其中 <span class="math inline">\(\boldsymbol{r}_i\)</span>
+为特征向量，<span class="math inline">\(\lambda_i\)</span>
+为特征值。常系数齐次微分方程组的通解为：</p>
+<p>[ (t) = (t) = C_1 e^{_1 t} _1 + C_2 e^{_2 t} _2 + + C_n e^{_n t} _n
+]</p>
+<h4 id="例子">例子</h4>
+<p>求解以下方程组的通解：</p>
+[ =
+<span class="math display">\[\begin{bmatrix}
+4 &amp; -1 &amp; -1 \\
+1 &amp; 2 &amp; -1 \\
+1 &amp; -1 &amp; 2
+\end{bmatrix} \boldsymbol{x}\]</span>
+<p>]</p>
+<p>特征方程为：</p>
+<p>[ ( - ) = (- 3)^2 (- 2) = 0 ]</p>
+<p>得到特征值 <span class="math inline">\(\lambda_1 = 2\)</span>，<span
+class="math inline">\(\lambda_2 = \lambda_3 =
+3\)</span>。对应的特征向量为：</p>
+[ _1 =
+<span class="math display">\[\begin{bmatrix} 1 \\ 1 \\ 1
+\end{bmatrix}\]</span>
+, _2 =
+<span class="math display">\[\begin{bmatrix} 1 \\ 1 \\ 0
+\end{bmatrix}\]</span>
+, _3 =
+<span class="math display">\[\begin{bmatrix} 1 \\ 0 \\ 1
+\end{bmatrix}\]</span>
+<p>]</p>
+<p>基解矩阵为：</p>
+[ (t) =
+<span class="math display">\[\begin{bmatrix}
+e^{2t} &amp; e^{3t} &amp; e^{3t} \\
+e^{2t} &amp; e^{3t} &amp; 0 \\
+e^{2t} &amp; 0 &amp; e^{3t}
+\end{bmatrix}\]</span>
+<p>]</p>
+<p>通解为：</p>
+[ (t) = C_1 e^{2t}
+<span class="math display">\[\begin{bmatrix} 1 \\ 1 \\ 1
+\end{bmatrix}\]</span>
+<ul>
+<li>C_2 e^{3t}
+<span class="math display">\[\begin{bmatrix} 1 \\ 1 \\ 0
+\end{bmatrix}\]</span>
+<ul>
+<li>C_3 e^{3t}
+<span class="math display">\[\begin{bmatrix} 1 \\ 0 \\ 1
+\end{bmatrix}\]</span>
+]</li>
+</ul></li>
+</ul>
+<h4 id="boldsymbola-没有-n-个线性无关的特征向量">(2) <span
+class="math inline">\(\boldsymbol{A}\)</span> 没有 <span
+class="math inline">\(n\)</span> 个线性无关的特征向量</h4>
+<p>当 <span class="math inline">\(\boldsymbol{A}\)</span> 没有 <span
+class="math inline">\(n\)</span>
+个线性无关的特征向量时，不能对角化矩阵，采用 Jordan
+标准型。此时，解的形式为：</p>
+<p>[ (t) = e^{_i t} ( _0 + _1 + <em>2 + + </em>{n_i - 1} ) ]</p>
+<p>其中，<span class="math inline">\(\boldsymbol{r}_0\)</span>
+是齐次线性方程组的非零解，<span class="math inline">\(\boldsymbol{r}_1,
+\dots, \boldsymbol{r}_{n_i - 1}\)</span> 由下列递推关系式确定：</p>
+<p>[ _1 = ( - _i ) _0, <em>2 = ( - <em>i ) <em>1, </em>{n</em>{i}-1} = (
+- <em>i ) </em>{n</em>{i}-2} ]</p>
+<h4 id="求微分方程组">求微分方程组</h4>
+<p>[ = ]</p>
+<p>的通解.</p>
+<h5 id="解">解</h5>
+<p>首先列出<span
+class="math inline">\(\boldsymbol{A}\)</span>的特征方程并求其特征值</p>
+<p>[ (-)=()^{3}=0,  <em>{1}=</em>{2}=_{3}=1 ]</p>
+<p>对于三重特征值<span
+class="math inline">\(\lambda_{1}=1\)</span>，由于<span
+class="math inline">\((\boldsymbol{A}-\boldsymbol{E})\)</span>不满秩，故先求出方程组<span
+class="math inline">\((\boldsymbol{A}-\boldsymbol{E})^{3}\boldsymbol{r}=\boldsymbol{0}\)</span>的解：</p>
+<p>[ <em>{0}^{(1)}= </em>{0}^{(2)}= _{0}^{(3)}=]</p>
+<p>将<span
+class="math inline">\(\boldsymbol{r}_{0}^{(1)}\)</span>、<span
+class="math inline">\(\boldsymbol{r}_{0}^{(2)}\)</span>和<span
+class="math inline">\(\boldsymbol{r}_{0}^{(3)}\)</span>分别代入上述公式，可得：</p>
+<p>[ <em>{1}<sup>{(1)}=(-)<em>{0}^{(1)} =
+</em>{2}</sup>{(1)}=(-)</em>{1}^{(1)} = ]</p>
+<p>[ <em>{1}<sup>{(2)}=(-)<em>{0}^{(2)} =
+</em>{2}</sup>{(2)}=(-)</em>{1}^{(2)} = ]</p>
+<p>[ <em>{1}<sup>{(3)}=(-)<em>{0}^{(3)} =
+</em>{2}</sup>{(3)}=(-)</em>{1}^{(3)} = ]</p>
+<p>将<span class="math inline">\(\boldsymbol{r}_{0}^{(1)},
+\boldsymbol{r}_{1}^{(1)}, \boldsymbol{r}_{2}^{(1)},
+\boldsymbol{r}_{0}^{(2)}, \boldsymbol{r}_{1}^{(2)},
+\boldsymbol{r}_{2}^{(2)}, \boldsymbol{r}_{0}^{(3)},
+\boldsymbol{r}_{1}^{(3)},
+\boldsymbol{r}_{2}^{(3)}\)</span>分别代入上述式子，得到三个特解</p>
+<p>[
+<em>{1}(t)=^{t}(</em>{0}<sup>{(1)}+t<em>{1}^{(1)}+</em>{2}</sup>{(1)})=^{t}(
++ t + ) = ^{t} ]</p>
+<p>[
+<em>{2}(t)=^{t}(</em>{0}<sup>{(2)}+t<em>{1}^{(2)}+</em>{2}</sup>{(2)})=^{t}(
++ t + ) = ^{t} ]</p>
+<p>[
+<em>{3}(t)=^{t}(</em>{0}<sup>{(3)}+t<em>{1}^{(3)}+</em>{2}</sup>{(3)})=^{t}(
++ t + ) = ^{t} ]</p>
+<p>则微分方程组的通解为：</p>
+<p>[ (t)= ]</p>
+<p>其中<span
+class="math inline">\(\boldsymbol{c}\)</span>是任意三维常数向量.</p>
+<h4 id="boldsymbola有复特征值"><strong><span
+class="math inline">\(\boldsymbol{A}\)</span>有复特征值</strong></h4>
+<h5 id="定理-2">定理</h5>
+<p>设方程组有一个复数解</p>
+<p>[ _{1}(t)=(t) (t) ]</p>
+<p>则<span class="math inline">\(\boldsymbol{u}(x)\)</span>与<span
+class="math inline">\(\boldsymbol{v}(x)\)</span>是方程组两个线性无关的特解，可以代替<span
+class="math inline">\(\boldsymbol{x}_{1}(t)\)</span>与其共轭.</p>
+<p>所以我们如果遇到复特征值时，只需选一组中的一个进行计算就好了.</p>
+<h5 id="例子-1">例子</h5>
+<p>求解初值问题</p>
+<p>[ = ]</p>
+<h5 id="解-1">解</h5>
+<p>首先求<span class="math inline">\(\boldsymbol{A}\)</span>的特征值</p>
+<p>[ (-)=()^{2}+1=0, <em>{1}=5+,</em>{2}=5- ]</p>
+<p>接下来不论是计算<span
+class="math inline">\(\lambda_{1}\)</span>还是<span
+class="math inline">\(\lambda_{2}\)</span>，是一样的，这里以<span
+class="math inline">\(\lambda_{1}\)</span>为例，其特征向量为</p>
+<p>[ _{1}=]</p>
+<p>此时有特解</p>
+<p>[ _{0}(t) =<sup>{(5+)t}=</sup>{5t} ( + ) ]</p>
+<p>则该微分方程组有两个特解</p>
+<p>[ <em>{1}(t)=^{5t} </em>{2}(t)=^{5t} ]</p>
+<p>则微分方程组的通解为</p>
+<p>[ (t)= ^{5t} ]</p>
+<p>其中<span
+class="math inline">\(\boldsymbol{c}\)</span>是任意二维常数向量.</p>
+<h6 id="备注">备注</h6>
+<p>以上就是所用题的通用解法，但当然有些时候还是要因题而异，或许会有更简单的解答方法.</p>
+<h4 id="求解微分方程组">求解微分方程组</h4>
+<p>[ = ]</p>
+<p>其中</p>
+<p>[ =]</p>
+<h5 id="解法">解法</h5>
+<p>设<span
+class="math inline">\(\boldsymbol{y}=(y_{1},y_{2},y_{3})^{T}\)</span>，则该方程组可以写成</p>
+[ {
+<span class="math display">\[\begin{array}{l}
+\dot{y_{1}}(x)=y_{2}+y_{3} \\
+\dot{y_{2}}(x)=y_{1}+y_{3} \\
+\dot{y_{3}}(x)=y_{1}+y_{2}
+\end{array}\]</span>
+<p>. ]</p>
+<p>由此得到</p>
+<p>[ =2(y_{1}+y_{2}+y_{3}) ]</p>
+<p>于是</p>
+<p>[ (y_{1}+y_{2}+y_{3})=c ^{2x} ]</p>
+<p>将上式代入方程组得</p>
+[ {
+<span class="math display">\[\begin{array}{l}
+\dot{y_{1}}(x)=c\mathrm{e}^{2x}-y_{1} \\
+\dot{y_{2}}(x)=c\mathrm{e}^{2x}-y_{2} \\
+\dot{y_{3}}(x)=c\mathrm{e}^{2x}-y_{3}
+\end{array}\]</span>
+<p>. ]</p>
+<p>这是三个一阶线性微分方程。由此得到</p>
+[
+<span class="math display">\[\begin{array}{l}
+y_{1}=\frac{1}{3}c\mathrm{e}^{2x}+c_{1}\mathrm{e}^{-x}\\
+y_{2}=\frac{1}{3}c\mathrm{e}^{2x}+c_{2}\mathrm{e}^{-x}\\
+y_{3}=\frac{1}{3}c\mathrm{e}^{2x}+c_{3}\mathrm{e}^{-x}
+\end{array}\]</span>
+<p>]</p>
+<p>又由于<span
+class="math inline">\((y_{1}+y_{2}+y_{3})=c\mathrm{e}^{2x}\)</span>，则<span
+class="math inline">\(c_{3}=-(c_{1}+c_{2})\)</span>，因此通解为</p>
+[
+<span class="math display">\[\begin{array}{l}
+y_{1}=\frac{1}{3}c\mathrm{e}^{2x}+c_{1}\mathrm{e}^{-x}\\
+y_{2}=\frac{1}{3}c\mathrm{e}^{2x}+c_{2}\mathrm{e}^{-x}\\
+y_{3}=\frac{1}{3}c\mathrm{e}^{2x}-(c_{1}+c_{2})\mathrm{e}^{-x}
+\end{array}\]</span>
+<p>]</p>
+<h2 id="常系数非齐次微分方程组">常系数非齐次微分方程组</h2>
+<p>对于常系数非齐次微分方程组</p>
+<p>[ =+(t) ]</p>
+<p>我们可以按照<span
+class="math inline">\(\ref{特解}\)</span>先求出特解，并求出其齐次的通解后将两者相加。
+当然对于特解<span
+class="math inline">\(\ref{特解}\)</span>我们有更加方便的解法</p>
+<h4 id="定理-3">定理</h4>
+<p>设<span class="math inline">\(\boldsymbol{X}(t)\)</span>
+是常系数线性齐次微分方程组满足 <span
+class="math inline">\(\boldsymbol{X}(0)=\boldsymbol{E}\)</span>的基解矩阵，则常系数线性非齐次微分方程组的通解可表示为</p>
+<p>[ (t)=(t)+<em>{t</em>{0}}^{t} (t-)() ]</p>
+<p>而对于满足初值条件<span
+class="math inline">\(\boldsymbol{x}(t_{0})=\boldsymbol{x}_{0}\)</span>的特解可表示为</p>
+<p>[ (t)=(t-t_{0})<em>{0}+</em>{t_{0}}^{t} (t-)() ]</p>
+<p>对于该定理的证明，编者会在下一节提及。可以认为此定理的一个必要条件为对于满足<span
+class="math inline">\(\boldsymbol{X}(0)=\boldsymbol{E}\)</span>的常系数线性齐次微分方程组的基解矩阵，<span
+class="math inline">\(\boldsymbol{X}^{-1}(t_{1})=\boldsymbol{X}(-t_{1}),\
+\boldsymbol{X}(t_{1})+\boldsymbol{X}(t_{2})=\boldsymbol{X}(t_{1}+t_{2})\)</span></p>
+<h4 id="例题求解非齐次微分方程组">例题：求解非齐次微分方程组</h4>
+<p>求解如下非齐次微分方程组</p>
+[ {
+<span class="math display">\[\begin{array}{l}
+\dot{y}(x)=z+2\mathrm{e}^{x} \\
+\dot{z}(x)=y+\mathrm{e}^{x}
+\end{array}\]</span>
+<p>. ]</p>
+<h5 id="解法-1">解法</h5>
+<p>首先整理得</p>
+<p>[ = + ]</p>
+<p>不妨令<span class="math inline">\(\boldsymbol{m}(x)=(y\
+z)^{T}\)</span>，求出其一个基解矩阵为</p>
+<p>[ _{1}(x)=]</p>
+<p>为了使用定理<span
+class="math inline">\(\ref{chuzhi}\)</span>，选取基解矩阵</p>
+<p>[ (x)=<em>{1}(x)</em>{1}^{-1}(0)=]</p>
+<p>这样可以保证<span
+class="math inline">\(\boldsymbol{M}(0)=\boldsymbol{E}\)</span>。将<span
+class="math inline">\(\boldsymbol{M}(x)\)</span>代入方程<span
+class="math inline">\(\ref{两解初值}\)</span>，得到</p>
+<p>[ (x)= + ]</p>
+<h1
+id="jordan标准形与常系数线性微分方程组">Jordan标准形与常系数线性微分方程组</h1>
+<p>相信大家可能对教材上当 <span
+class="math inline">\(\boldsymbol{A}\)</span> 没有 <span
+class="math inline">\(n\)</span> 个特征向量时为什么要构造 <span
+class="math inline">\(\ref{广义解}\)</span>
+这种形式。这其实和线性代数中的 Jordan 标准型有关。</p>
+<h2 id="前置知识jordan-标准形">前置知识：Jordan 标准形</h2>
+<h3 id="jordan-块">Jordan 块</h3>
+<h4 id="定义jordan-块">定义：Jordan 块</h4>
+<p>如果一个矩阵主对角线全为 <span
+class="math inline">\(\lambda\)</span>，副对角线全为 1，其他地方都是
+0，我们称这样的矩阵为一个 Jordan 块。</p>
+<p>注意一个 Jordan 块主对角线上元素是相同的，而且可以是 0。例如：</p>
+<p><span class="math display">\[
+\boldsymbol{J} = \begin{bmatrix}
+    2 &amp; 1 &amp; &amp;\\
+    &amp;2&amp;1&amp;\\
+    &amp;&amp;2&amp;1\\
+    &amp;&amp;&amp;2
+\end{bmatrix}
+\]</span></p>
+<p>这是一个 <span class="math inline">\(\lambda = 2\)</span> 的四阶
+Jordan 块。</p>
+<h3 id="jordan-标准形">Jordan 标准形</h3>
+<h4 id="定义jordan-标准形">定义：Jordan 标准形</h4>
+<p>Jordan 块组成的对角阵 <span class="math inline">\(\boldsymbol{J} =
+\operatorname{diag}(\boldsymbol{J_1}, \boldsymbol{J_2}, \dots,
+\boldsymbol{J_m})\)</span> 为一个 Jordan 标准形。</p>
+<p>我们有如下定理：</p>
+<h4 id="定理jordan-标准化">定理：Jordan 标准化</h4>
+<p>对于任何一个方阵 <span
+class="math inline">\(\boldsymbol{A}\)</span>，总存在可逆阵 <span
+class="math inline">\(\boldsymbol{P}\)</span> 使得 <span
+class="math inline">\(\boldsymbol{A} =
+\boldsymbol{PJP}^{-1}\)</span>。</p>
+<p>这个证明比较复杂，主要对比对角化解释 <span
+class="math inline">\(\boldsymbol{J}, \boldsymbol{P}\)</span>
+的含义：</p>
+<ul>
+<li><p><span class="math inline">\(\boldsymbol{J}\)</span> 的主对角线是
+<span class="math inline">\(\boldsymbol{A}\)</span>
+的特征值，根据代数重数重复，这一点和对角化相同。</p></li>
+<li><p><span class="math inline">\(\boldsymbol{P}\)</span>
+的列向量被称为“广义特征向量”。当特征值的几何重数 <span
+class="math inline">\(m\)</span> 小于代数重数 <span
+class="math inline">\(c\)</span> 时，无法对角化是因为 <span
+class="math inline">\((\lambda \boldsymbol{E} - \boldsymbol{A}) x =
+0\)</span> 的解空间没有那么多的基。但是，广义特征向量被定义为 <span
+class="math inline">\((\lambda \boldsymbol{E} - \boldsymbol{A})^c x =
+0\)</span> 的解空间的基。可以证明，这样的基总有 <span
+class="math inline">\(c\)</span>
+个。因此，总是能找到广义特征向量，也就总是能找到 <span
+class="math inline">\(\boldsymbol{P}\)</span>。</p></li>
+<li><p><span class="math inline">\(\boldsymbol{J}\)</span> 由不同的
+Jordan
+块构成。显然，不同的特征值对应不同的块，但是相同的特征值也可能在不同的块内。一般地，<span
+class="math inline">\(\lambda_i\)</span> 对应的块的数量是 <span
+class="math inline">\(\lambda_i\)</span> 的几何重数，而 <span
+class="math inline">\(\lambda_i\)</span> 对应 Jordan 块中阶数恰为 <span
+class="math inline">\(k\)</span> 的块的数量为：</p>
+<p><span class="math display">\[
+\text{rank }(\lambda_i \boldsymbol{E} - \boldsymbol{A})^{k-1} +
+\text{rank }(\lambda_i \boldsymbol{E} - \boldsymbol{A})^{k+1} - 2 \text{
+rank }(\lambda_i \boldsymbol{E} - \boldsymbol{A})^{k}
+\]</span></p></li>
+</ul>
+<h2 id="常系数一阶线性微分方程组">常系数一阶线性微分方程组</h2>
+<p>在线性常微分方程组中，常系数的方程组可以使用代数方法解出，这里给出一种一般方法，它是借助线性代数里的
+Jordan
+标准形以及矩阵相似理论给出的一种解法。以下总假设所讨论的方程组的形式为：</p>
+<p><span class="math display">\[
+\boldsymbol{y}&#39;(x) = \boldsymbol{A} \boldsymbol{y}, \quad
+\boldsymbol{y}(0) = \boldsymbol{y_0}
+\]</span></p>
+<p>其中， <span class="math inline">\(\boldsymbol{A} \in \mathbb{R}^{n
+\times n}\)</span>。</p>
+<h3 id="矩阵指数">矩阵指数</h3>
+<h4 id="说明">说明</h4>
+<p>也许有人难以理解为何会有 <span class="math inline">\(n\)</span>
+个线性无关的解。我们将方程组展开，每一个微分方程都有一个独立常数 <span
+class="math inline">\(C_i\)</span>。则所有的解构成一个与 <span
+class="math inline">\(\mathbb{R}^n\)</span> 同构的 <span
+class="math inline">\(n\)</span> 维空间。</p>
+<p>借助矩阵指数的概念，方程组的基解矩阵可以写作：</p>
+<p><span class="math display">\[
+\exp \boldsymbol{A} x = \sum_{n=0}^\infty \frac{\boldsymbol{A}^n}{n!}x^n
+\]</span></p>
+<p>规定 <span class="math inline">\(\boldsymbol{A}^0 =
+\boldsymbol{E}\)</span>。上述矩阵函数项级数的收敛性按照矩阵范数的概念进行定义（全实数集上收敛），求导法则和一般一元实函数级数的求导无异。</p>
+<p><span class="math inline">\(\exp \boldsymbol{A} x\)</span>
+是一个解矩阵，这是因为：</p>
+<p><span class="math display">\[
+(\exp \boldsymbol{A} x)&#39; = \boldsymbol{A} \sum_{n=1}^\infty
+\frac{\boldsymbol{A}^{n-1}}{(n-1)!}x^{n-1} = \boldsymbol{A} \exp
+\boldsymbol{A} x
+\]</span></p>
+<p>同时还是基解矩阵，因为在 <span class="math inline">\(x = 0\)</span>
+处， <span class="math inline">\(\det \exp (\boldsymbol{A} 0) = \det
+\boldsymbol{E} = 1 \neq 0\)</span>。从而在 <span
+class="math inline">\(\mathbb{R}\)</span> 上 <span
+class="math inline">\(\det \exp \boldsymbol{A} x \neq 0\)</span>。</p>
+<p>因此，我们得到了级数表示下的方程组的解，但在实际应用中，我们需要将其具体形式解出，因此还需要借助其他工具。</p>
+<p>当然对于矩阵指数函数，还有一些其他的性质。</p>
+<h4 id="定理-4">定理</h4>
+<ol type="1">
+<li><p>若 <span class="math inline">\(n\)</span> 阶实矩阵 <span
+class="math inline">\(\boldsymbol{A}\)</span> 与 <span
+class="math inline">\(\boldsymbol{B}\)</span> 可交换，即 <span
+class="math inline">\(\boldsymbol{AB} = \boldsymbol{BA}\)</span>，则
+<span class="math display">\[
+\exp (\boldsymbol{A} + \boldsymbol{B}) = \exp \boldsymbol{A} \cdot \exp
+\boldsymbol{B}
+\]</span></p></li>
+<li><p>对于任意的 <span class="math inline">\(n\)</span> 维矩阵 <span
+class="math inline">\(\boldsymbol{A}\)</span>，<span
+class="math inline">\(\exp \boldsymbol{A}\)</span> 可逆，且 <span
+class="math display">\[
+(\exp \boldsymbol{A})^{-1} = \exp (-\boldsymbol{A})
+\]</span></p></li>
+<li><p>若 <span class="math inline">\(n\)</span> 维矩阵 <span
+class="math inline">\(\boldsymbol{A}, \boldsymbol{P}\)</span>，<span
+class="math inline">\(\boldsymbol{P}\)</span> 可逆，则 <span
+class="math display">\[
+\exp (\boldsymbol{P} \boldsymbol{A} \boldsymbol{P}^{-1}) =
+\boldsymbol{P} \exp \boldsymbol{A} \boldsymbol{P}^{-1}
+\]</span></p></li>
+</ol>
+<h4 id="说明-1">说明</h4>
+<p>通过这些性质，我们很容易就能理解定理为何成立了。因为当 <span
+class="math inline">\(\boldsymbol{x}(0) = \boldsymbol{E}\)</span>
+时，<span class="math inline">\(\boldsymbol{x}\)</span>
+就是矩阵指数函数，所以满足上述性质。</p>
+<h3 id="可对角化的情形">可对角化的情形</h3>
+<p>设 <span class="math inline">\(\boldsymbol{A}\)</span> 可对角化，即
+<span class="math inline">\(\boldsymbol{A}\)</span> 在 <span
+class="math inline">\(\mathbb{C}\)</span> 上的特征值 <span
+class="math inline">\(\lambda_i, i = 1,2,\dots,n\)</span>
+都是相异的，那么由线性代数的知识，存在可逆矩阵 <span
+class="math inline">\(\boldsymbol{P}\)</span> 使得 <span
+class="math inline">\(\boldsymbol{P}^{-1}\boldsymbol{A}\boldsymbol{P} =
+\boldsymbol{D}\)</span> 为对角矩阵，而对于对角矩阵来说，有：</p>
+<p><span class="math display">\[
+\exp \boldsymbol{D} x = \begin{pmatrix}
+    \text{e}^{\lambda_1 x} &amp; \\
+    &amp; \text{e}^{\lambda_2 x} \\
+    &amp;&amp; \ddots \\
+    &amp;&amp;&amp; \text{e}^{\lambda_n x}
+\end{pmatrix}
+\]</span></p>
+<p>而可逆矩阵 <span class="math inline">\(\boldsymbol{P}\)</span> 的第
+<span class="math inline">\(i\)</span> 列形成的列向量就是特征值 <span
+class="math inline">\(\lambda_i\)</span> 所对应的特征向量 <span
+class="math inline">\(\boldsymbol{v}_i, i =
+1,2,\dots,n\)</span>。因此再由矩阵指数的性质：</p>
+<p><span class="math display">\[
+\exp (\boldsymbol{P} \boldsymbol{D} \boldsymbol{P}^{-1}) =
+\boldsymbol{P} (\exp \boldsymbol{D}) \boldsymbol{P}^{-1}
+\]</span></p>
+<p>有：</p>
+<p><span class="math display">\[
+\exp \boldsymbol{A} x = \boldsymbol{P} (\exp \boldsymbol{D} x)
+\boldsymbol{P}^{-1}
+\]</span></p>
+<p>上式就是基解矩阵的确定式，实际上由于 <span
+class="math inline">\(\boldsymbol{P}\)</span>
+可逆，基解矩阵有性质：它乘上任意可逆矩阵依然是基解矩阵（秩始终是 <span
+class="math inline">\(n\)</span>）。因此：</p>
+<p><span class="math display">\[
+(\exp \boldsymbol{A}x) \boldsymbol{P} = \boldsymbol{P} \exp
+\boldsymbol{D}x
+\]</span></p>
+<p>也是一个基解矩阵，将它写成列向量（特征向量）分块的形式，就是：</p>
+<p><span class="math display">\[
+(\text{e}^{\lambda_1x} \boldsymbol{v}_1, \text{e}^{\lambda_2x}
+\boldsymbol{v}_2, \dots, \text{e}^{\lambda_nx} \boldsymbol{v}_n)
+\]</span></p>
+<p>这样就避免了求逆的麻烦。</p>
+<p>但是上式不一定是实矩阵，当特征根出现复数时，用 <span
+class="math inline">\(\exp \boldsymbol{A}x = \boldsymbol{P} (\exp
+\boldsymbol{D}x) \boldsymbol{P}^{-1}\)</span> 作为基解矩阵更好。</p>
+<h3 id="化-jordan-标准形">化 Jordan 标准形</h3>
+<p>对于有重根的情形，确定矩阵 <span class="math inline">\(\exp
+\boldsymbol{A} x\)</span> 的具体形式的方法有很多，这里介绍 Jordan
+标准形法，其特点是通法清晰，操作机械。</p>
+<p>我们由矩阵相似的相关理论可以知道在 <span
+class="math inline">\(\mathbb{C}\)</span> 上，实矩阵 <span
+class="math inline">\(\boldsymbol{A}\)</span> 一定有 Jordan 标准形：</p>
+<p><span class="math display">\[
+\boldsymbol{J} = \begin{pmatrix}
+    \boldsymbol{J}_1 \\
+    &amp;\boldsymbol{J}_2 \\
+    &amp;&amp;\ddots \\
+    &amp;&amp;&amp;\boldsymbol{J}_s \\
+\end{pmatrix}
+\]</span></p>
+<p>其中，</p>
+<p><span class="math display">\[
+\boldsymbol{J}_i = \begin{pmatrix} \lambda_i &amp; 1 \\ &amp; \lambda_i
+&amp; 1 \\ &amp;  &amp; \lambda_i &amp; \ddots \\ &amp;  &amp; &amp;
+\ddots &amp; 1 \\ &amp; &amp; &amp; &amp; \lambda_i \end{pmatrix} \in
+\mathbb{C}^{t_i \times t_i}, i = 1,2,\dots,s
+\]</span></p>
+<p>且 <span class="math inline">\(\sum_{i=1}^s t_i = n\)</span>.
+并存在矩阵 <span class="math inline">\(\boldsymbol{P}\)</span> 使得
+<span class="math inline">\(\boldsymbol{P}^{-1} \boldsymbol{A}
+\boldsymbol{P} = \boldsymbol{J}\)</span> ，于是</p>
+<p><span class="math display">\[
+\exp \boldsymbol{J}x = \boldsymbol{P} \begin{pmatrix}
+    \exp \boldsymbol{J}_1x \\
+    &amp; \exp \boldsymbol{J}_2x \\
+    &amp;&amp; \ddots \\
+    &amp;&amp;&amp; \exp \boldsymbol{J}_sx
+\end{pmatrix} \boldsymbol{P}^{-1}
+\]</span></p>
+<p>其中，</p>
+<p><span class="math display">\[
+\exp \boldsymbol{J_i}x = \begin{pmatrix}
+    1 \\
+    x &amp; 1 \\
+    \dfrac{x^2}{2!} &amp; x &amp; 1 \\
+    \vdots &amp; \ddots &amp; \ddots &amp; \ddots \\
+    \dfrac{x^{(t_i-1)}}{(t_i-1)!} &amp; \cdots &amp; \dfrac{x^2}{2!}
+&amp; x &amp; 1 \end{pmatrix} \text{e}^{\lambda_ix}
+\]</span></p>
+<p>于是， <span class="math inline">\(\exp \boldsymbol{A}x =
+\boldsymbol{P} (\exp \boldsymbol{J}x) \boldsymbol{P}^{-1}\)</span>.
+就是基解矩阵，在 <span class="math inline">\(\lambda_i\)</span>
+均为实数时，可直接计算 <span class="math inline">\(\boldsymbol{P} \exp
+\boldsymbol{J}x\)</span>.</p>
+<h4 id="例题">例题</h4>
+<h5 id="求线性微分方程组的通解">求线性微分方程组的通解：</h5>
+<p><span class="math display">\[
+\frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t} =
+\boldsymbol{A}\boldsymbol{x},
+\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[
+\boldsymbol{A} =
+\begin{pmatrix}
+    2 &amp; -2 &amp; 3 \\
+    10 &amp; -4 &amp; 5 \\
+    5 &amp; -4 &amp; 6
+\end{pmatrix}
+\]</span></p>
+<h5 id="解答">解答：</h5>
+<p>首先求矩阵特征值, 解方程 <span
+class="math inline">\(\det(\boldsymbol{I}-\lambda\boldsymbol{A})=0\)</span>,
+得到</p>
+<p><span class="math display">\[
+\lambda_1 = 2, \quad \lambda_{2,3} = 1
+\]</span></p>
+<p>验证矩阵的秩, 容易得到 <span
+class="math inline">\(\boldsymbol{A}\)</span> 的 Jordan 标准形为</p>
+<p><span class="math display">\[
+\boldsymbol{J} = \boldsymbol{T^{-1}AT} =
+\begin{pmatrix}
+    2 &amp;  &amp;  \\
+    &amp; 1 &amp; 1 \\
+    &amp;  &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[
+\boldsymbol{T} =
+\begin{pmatrix}
+    4 &amp; 2 &amp; 1 \\
+    15 &amp; 10 &amp; 1 \\
+    10 &amp; 6 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>做线性变换 <span class="math inline">\(\boldsymbol{x} =
+\boldsymbol{T} \boldsymbol{x}^{*}\)</span>, 解对应的方程组,
+得到通解为</p>
+<p><span class="math display">\[
+\boldsymbol{x}^{*} = \begin{pmatrix}
+    C_1 \mathrm{e}^{2t} \\
+    C_2 \mathrm{e}^{t} + C_3 t \mathrm{e}^{t} \\
+    C_3 \mathrm{e}^{t}
+\end{pmatrix}
+\]</span></p>
+<p>从而</p>
+<p><span class="math display">\[
+\boldsymbol{x} = \boldsymbol{T} \boldsymbol{x}^{*} =
+\begin{pmatrix}
+    4C_1 \mathrm{e}^{2t} + (2C_2 + 2C_3 t + C_3) \mathrm{e}^{t} \\
+    15C_1 \mathrm{e}^{2t} + (10C_2 + 10C_3 t + C_3) \mathrm{e}^{t} \\
+    10C_1 \mathrm{e}^{2t} + (6C_2 + 6C_3 t + C_3) \mathrm{e}^{t}
+\end{pmatrix}
+\]</span></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA%E6%8A%80%E6%9C%AF/" rel="tag"># 理论技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/12/2024-2025%E7%AC%AC%E4%B8%80%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E8%AE%B0/" rel="prev" title="2024-2025第一学期期末记">
+                  <i class="fa fa-angle-left"></i> 2024-2025第一学期期末记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liYe0v5YbvEbkofU","client_secret":"b36ae1332e6c076f8617a42669c5f7dba698b2e7","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"02c977fdcb2c669a180ffb144f12db7d"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
