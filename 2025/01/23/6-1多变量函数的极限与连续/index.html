@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="6.1多变量函数的极限与连续">
+<meta property="og:url" content="http://yhfrozen.github.io/2025/01/23/6-1%E5%A4%9A%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-23T15:41:12.000Z">
+<meta property="article:modified_time" content="2025-01-23T15:42:03.578Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="Frost,dailylife">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2025/01/23/6-1%E5%A4%9A%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2025/01/23/6-1%E5%A4%9A%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/","path":"2025/01/23/6-1多变量函数的极限与连续/","title":"6.1多变量函数的极限与连续"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>6.1多变量函数的极限与连续 | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD"><span class="nav-number">1.</span> <span class="nav-text">多变量函数的极限与连续</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E7%82%B9%E9%9B%86"><span class="nav-number">1.1.</span> <span class="nav-text">平面点集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%82%B9%E5%A4%96%E7%82%B9%E8%BE%B9%E7%95%8C%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">内点、外点、边界点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%9B%86%E9%97%AD%E9%9B%86%E9%9D%9E%E5%BC%80%E9%9D%9E%E9%97%AD%E9%9B%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">开集、闭集、非开非闭集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%82%B9%E5%AD%A4%E7%AB%8B%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">聚点、孤立点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%9B%86%E4%B8%8E%E9%97%AD%E9%9B%86%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.4.</span> <span class="nav-text">开集与闭集的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E9%80%9A%E5%8C%BA%E5%9F%9F%E9%97%AD%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.1.5.</span> <span class="nav-text">连通、区域、闭区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E9%99%90%E6%9F%AF%E8%A5%BF%E7%82%B9%E5%88%97"><span class="nav-number">1.1.6.</span> <span class="nav-text">极限、柯西点列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90"><span class="nav-number">1.2.</span> <span class="nav-text">二元函数的极限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%87%8D%E6%9E%81%E9%99%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">二重极限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E8%BF%9E%E7%BB%AD"><span class="nav-number">1.2.2.</span> <span class="nav-text">一致连续</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%AF%E6%AC%A1%E6%9E%81%E9%99%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">累次极限</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2025/01/23/6-1%E5%A4%9A%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="6.1多变量函数的极限与连续 | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6.1多变量函数的极限与连续
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-23 23:41:12 / 修改时间：23:42:03" itemprop="dateCreated datePublished" datetime="2025-01-23T23:41:12+08:00">2025-01-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<h1 id="多变量函数的极限与连续">多变量函数的极限与连续</h1>
+<h2 id="平面点集">平面点集</h2>
+<p>一些简单的概念： 邻域<span
+class="math inline">\(B(M,\epsilon)\)</span>、去心邻域<span
+class="math inline">\(B_-(M,\epsilon)\)</span></p>
+<h3 id="内点外点边界点">内点、外点、边界点</h3>
+<p>给定平面子集<span
+class="math inline">\(E\)</span>，，则平面中的点M想对于子集E可以划分为三类：</p>
+<ul>
+<li><strong>内点</strong>：如果存在<span class="math inline">\(\epsilon
+&gt; 0\)</span>，使得<span class="math inline">\(B(M,\epsilon) \subset
+E\)</span>，则称<span class="math inline">\(M\)</span>为<span
+class="math inline">\(E\)</span>的<u>内点</u>. <span
+class="math inline">\(E\)</span>的内点都属于<span
+class="math inline">\(E\)</span>,<span
+class="math inline">\(E\)</span>的所有内点的集合记为<span
+class="math inline">\(E^o\)</span>.</li>
+<li><strong>外点</strong>：如果存在<span class="math inline">\(\epsilon
+&gt; 0\)</span>，使得<span class="math inline">\(B(M,\epsilon) \subset
+E^c\)</span>(指<span class="math inline">\(E\)</span>的补集)，则称<span
+class="math inline">\(M\)</span>为<span
+class="math inline">\(E\)</span>的<u>外点</u>，故不属于<span
+class="math inline">\(E\)</span>.</li>
+<li><strong>边界点</strong>：如果存在<span
+class="math inline">\(\epsilon &gt; 0\)</span>，使得<span
+class="math inline">\(B(M,\epsilon)\)</span>中既有<span
+class="math inline">\(E\)</span>中的点，又有<span
+class="math inline">\(E^c\)</span>中的点，则称<span
+class="math inline">\(M\)</span>为<span
+class="math inline">\(E\)</span>的<u>边界点</u>. <span
+class="math inline">\(E\)</span>的边界点不一定属于<span
+class="math inline">\(E\)</span>. <span
+class="math inline">\(E\)</span>的所有边界点的集合称为<span
+class="math inline">\(E\)</span>的边界，记为<span
+class="math inline">\(\partial E\)</span>. (<span
+class="math inline">\(E\)</span>和<span
+class="math inline">\(E^c\)</span>具有相同的边界)</li>
+</ul>
+<h3 id="开集闭集非开非闭集">开集、闭集、非开非闭集</h3>
+<ul>
+<li><strong>开集</strong>：如果<span
+class="math inline">\(E\)</span>中的每一个点都是内点，即称<span
+class="math inline">\(E\)</span>为开集.</li>
+<li><strong>闭集</strong>：如果<span
+class="math inline">\(E^c\)</span>为开集，则称<span
+class="math inline">\(E\)</span>为闭集.</li>
+<li><strong>非开非闭集</strong>：顾名思义，不是开集也不是闭集的点集.</li>
+</ul>
+<p>一般规定全平面<span
+class="math inline">\(\mathbb{R}^2\)</span>为开集，空集既是开集也是闭集.</p>
+<h3 id="聚点孤立点">聚点、孤立点</h3>
+<ul>
+<li><strong>聚点</strong>：设<span
+class="math inline">\(E\)</span>为一个给定的平面子集，<span
+class="math inline">\(M\)</span>为平面中的一点. 如果对<span
+class="math inline">\(\forall \epsilon &gt;0, B_-(M,\epsilon) \cap E
+\neq \emptyset\)</span>, 即<span
+class="math inline">\(M\)</span>的任意邻域内都含有异于<span
+class="math inline">\(M\)</span>的<span
+class="math inline">\(E\)</span>中的点，则称<span
+class="math inline">\(M\)</span>为<span
+class="math inline">\(E\)</span>的<u>聚点</u>.</li>
+</ul>
+<p><strong>定理</strong>： 平面非空子集<span
+class="math inline">\(E\)</span>为闭集当且仅当<span
+class="math inline">\(E\)</span>的每一个聚点都属于<span
+class="math inline">\(E\)</span>.</p>
+<p>虽然闭集包含了其所有聚点，但闭集可以有不是聚点的点，例如： <span
+class="math display">\[
+E=\{(x,y) \in \mathbb{R}^2 | x^2+y^2 \leqslant 1\} \cap \{(2,2) \}
+\]</span> - <strong>孤立点</strong>：一般地，设<span
+class="math inline">\(M\)</span>为平面子集<span
+class="math inline">\(E\)</span>中的一点，若存在<span
+class="math inline">\(\epsilon &gt;0\)</span>，使得<span
+class="math inline">\(B(M,\epsilon) \cap E =\{ M\}\)</span>,则称<span
+class="math inline">\(M\)</span>为<span
+class="math inline">\(E\)</span>的<u>孤立点</u>.</p>
+<p>点集中的任意一点要么是其聚点，要么是孤立点.</p>
+<h3 id="开集与闭集的条件">开集与闭集的条件</h3>
+<ul>
+<li><span class="math inline">\(E\)</span>为开集的充要条件是 <span
+class="math inline">\(\partial E \cap E = \emptyset\)</span>;</li>
+<li><span class="math inline">\(E\)</span>为闭集的充要条件是 <span
+class="math inline">\(\partial E \subset E\)</span>.</li>
+</ul>
+<h3 id="连通区域闭区域">连通、区域、闭区域</h3>
+<ul>
+<li><strong>连通</strong>：如果对于<span
+class="math inline">\(E\)</span>中的任意两点，存在一条包含在<span
+class="math inline">\(E\)</span>中的连接这两个点的平面曲线，则称<span
+class="math inline">\(E\)</span>是<u>连通</u>的.</li>
+<li><strong>区域</strong>：非空连通开集.</li>
+<li><strong>闭区域</strong>：一个区域和其边界的并集.</li>
+</ul>
+<h3 id="极限柯西点列">极限、柯西点列</h3>
+<p>设<span class="math inline">\(\{ M_n \}\)</span>为平面点列.
+如果存在点<span class="math inline">\(M_0 \in \mathbb{R}^2\)</span>,
+使得 <span class="math display">\[
+\lim_{n \rightarrow \infty } \rho (M_n,M_0)=0
+\]</span> 即对<span class="math inline">\(\forall \epsilon &gt;0, \exist
+N&gt;0\)</span>,当<span
+class="math inline">\(n&gt;N\)</span>时，不等式<span
+class="math inline">\(\rho (M_n,M_0)&lt;
+\epsilon\)</span>成立，则称该点列<strong>收敛</strong>，并称<span
+class="math inline">\(M_0\)</span>是点列<span class="math inline">\(\{
+M_n \}\)</span>的极限.</p>
+<p><strong>柯西点列</strong>：若对<span class="math inline">\(\forall
+\epsilon &gt;0, \exist N&gt;0\)</span>,当<span
+class="math inline">\(n,m&gt;N\)</span>时，<span
+class="math inline">\(\rho(M_n,M_m)&lt; \epsilon\)</span>，则称点列<span
+class="math inline">\(\{ M_n \}\)</span>为<u>柯西点列</u></p>
+<h2 id="二元函数的极限">二元函数的极限</h2>
+<h3 id="二重极限">二重极限</h3>
+<p>设<span class="math inline">\(D \subset \mathbb{R}^2, f: D
+\rightarrow \mathbb{R}\)</span>为二元函数，<span
+class="math inline">\(M_0\)</span>为<span
+class="math inline">\(D\)</span>的聚点. 如果存在常数<span
+class="math inline">\(a\)</span>,对<span class="math inline">\(\forall
+\epsilon &gt;0, \exist \delta&gt;0\)</span>,当<span
+class="math inline">\(M \in D\)</span>且<span
+class="math inline">\(0&lt;\rho (M,M_0)&lt;\delta\)</span>时，<span
+class="math inline">\(|f(M)-a|&lt;\epsilon\)</span>,则称<span
+class="math inline">\(M\)</span>趋于<span
+class="math inline">\(M_0\)</span>时，<span
+class="math inline">\(f(M)\)</span>以<span
+class="math inline">\(a\)</span>为<strong>极限</strong>，记为 <span
+class="math display">\[
+\lim_{M \rightarrow M_0} f(M)=a
+\]</span></p>
+<h3 id="一致连续">一致连续</h3>
+<p>设<span class="math inline">\(f\)</span>是有界闭集<span
+class="math inline">\(D\)</span>上的连续函数，对<span
+class="math inline">\(\forall \epsilon &gt;0,\exist \delta
+&gt;0\)</span>,当<span class="math inline">\(M_1,M_2\in
+D\)</span>且$(M_1,M_2) &lt; $时，</p>
+<p><span class="math display">\[
+|f(M_1)-f(M_2)|&lt; \epsilon
+\]</span></p>
+<p>其和<strong>连续</strong>的区别在于<span
+class="math inline">\(|f(M_1)-f(M_2)|\)</span>可以趋近于<span
+class="math inline">\(\infty\)</span>.</p>
+<h3 id="累次极限">累次极限</h3>
+<p>这是一个容易和二重极限混淆的概念.</p>
+<p>设二元函数<span class="math inline">\(f(x,y)\)</span>在<span
+class="math inline">\((x_,y_0)\)</span>的某一去心邻域内有定义.
+如果对任意固定的<span class="math inline">\(y\)</span>，极限<span
+class="math inline">\(\lim_{x \rightarrow x_0}
+f(x,y)\)</span>存在，令<span class="math inline">\(\phi (y)=\lim_{x
+\rightarrow x_0}f(x,y)\)</span>,它是定义在<span
+class="math inline">\(y_0\)</span>附近的函数. 如果<span
+class="math inline">\(\lim_{y \rightarrow y_0}
+\phi(y)\)</span>存在，则令</p>
+<p><span class="math display">\[
+\lim_{y \rightarrow y_0} \lim_{x \rightarrow x_0}f(x,y)=\lim_{y
+\rightarrow y_0}\phi (y),
+\]</span> 称之为函数<span class="math inline">\(f(x,y)\)</span>在<span
+class="math inline">\((x_0,y_0)\)</span>处的一个<strong>累次极限</strong>.
+类似地，另一个累次极限为 <span class="math display">\[
+\lim_{x \rightarrow x_0} \lim_{y \rightarrow y_0}f(x,y)
+\]</span></p>
+<p>累次极限和重极限之间没有明显的关系.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/12/%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%BB%84/" rel="prev" title="一阶线性微分方程组">
+                  <i class="fa fa-angle-left"></i> 一阶线性微分方程组
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liYe0v5YbvEbkofU","client_secret":"b36ae1332e6c076f8617a42669c5f7dba698b2e7","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"20d1ec742c6cf81fa033c64589b4a868"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
