@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="计算机视觉(传统篇)">
+<meta property="og:url" content="http://yhfrozen.github.io/2025/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E4%BC%A0%E7%BB%9F%E7%AF%87/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-03T12:17:58.000Z">
+<meta property="article:modified_time" content="2025-08-03T16:40:51.444Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="cvlearning">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2025/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E4%BC%A0%E7%BB%9F%E7%AF%87/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2025/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E4%BC%A0%E7%BB%9F%E7%AF%87/","path":"2025/08/03/计算机视觉-传统篇/","title":"计算机视觉(传统篇)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>计算机视觉(传统篇) | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%92%8C%E8%A7%86%E9%A2%91"><span class="nav-number">1.</span> <span class="nav-text">图像和视频</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%8F%96%E6%A0%B7%E5%92%8C%E9%87%8F%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">图像的取样和量化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%96%E6%A0%B7sampling"><span class="nav-number">1.1.1.</span> <span class="nav-text">取样(Sampling):</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%A4%E6%B3%A2"><span class="nav-number">1.2.</span> <span class="nav-text">滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">1.3.</span> <span class="nav-text">直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">直方图均衡化算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E9%82%BB%E5%B7%AE%E5%80%BCnearest-neighbor-interpolation"><span class="nav-number">1.6.</span> <span class="nav-text">最近邻差值（Nearest Neighbor Interpolation）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E4%B8%8E%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.</span> <span class="nav-text">特征选择与特征提取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E4%B8%8E%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">特征选择与特征提取概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9-feature-selection"><span class="nav-number">2.1.1.</span> <span class="nav-text">特征选择 (Feature Selection)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96-feature-extraction"><span class="nav-number">2.1.2.</span> <span class="nav-text">特征提取 (Feature Extraction)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%AE%E5%BC%82"><span class="nav-number">2.1.3.</span> <span class="nav-text">差异</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E4%B8%8E%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">特征选择与特征提取原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">特征选择原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.2.</span> <span class="nav-text">特征提取原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9A%84%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">扩展的特征选择方法及代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E9%98%88%E5%80%BC%E8%BF%87%E6%BB%A4%E6%B3%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">方差阈值（过滤法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%89%B9%E5%BE%81%E6%B6%88%E9%99%A4-rfe-%E5%8C%85%E8%A3%85%E6%B3%95"><span class="nav-number">2.3.2.</span> <span class="nav-text">递归特征消除 (RFE, 包装法)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#l1-%E6%AD%A3%E5%88%99%E5%8C%96%E5%B5%8C%E5%85%A5%E6%B3%95"><span class="nav-number">2.3.3.</span> <span class="nav-text">L1 正则化（嵌入法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9A%84%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BB%A3%E7%A0%81"><span class="nav-number">2.4.</span> <span class="nav-text">扩展的特征提取方法及代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90-pca"><span class="nav-number">2.4.1.</span> <span class="nav-text">主成分分析 (PCA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90-lda"><span class="nav-number">2.4.2.</span> <span class="nav-text">线性判别分析 (LDA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sift-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.4.3.</span> <span class="nav-text">SIFT 特征提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.4.4.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sift%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.4.5.</span> <span class="nav-text">SIFT算法步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orb-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.4.6.</span> <span class="nav-text">ORB 特征提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hog-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.4.7.</span> <span class="nav-text">HOG 特征提取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96"><span class="nav-number">3.</span> <span class="nav-text">边缘提取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#canny-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.1.</span> <span class="nav-text">1. Canny 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.1.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#roberts-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.2.</span> <span class="nav-text">2. Roberts 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-1"><span class="nav-number">3.2.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sobel-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.3.</span> <span class="nav-text">3. Sobel 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-2"><span class="nav-number">3.3.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-2"><span class="nav-number">3.3.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-2"><span class="nav-number">3.3.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prewitt-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.4.</span> <span class="nav-text">4. Prewitt 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-3"><span class="nav-number">3.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-3"><span class="nav-number">3.4.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-3"><span class="nav-number">3.4.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-3"><span class="nav-number">3.4.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hessian-%E7%89%B9%E5%BE%81"><span class="nav-number">3.5.</span> <span class="nav-text">5. Hessian 特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-4"><span class="nav-number">3.5.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-4"><span class="nav-number">3.5.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-4"><span class="nav-number">3.5.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-4"><span class="nav-number">3.5.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#haar-%E7%89%B9%E5%BE%81"><span class="nav-number">3.6.</span> <span class="nav-text">6. Haar 特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-5"><span class="nav-number">3.6.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-5"><span class="nav-number">3.6.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-5"><span class="nav-number">3.6.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-5"><span class="nav-number">3.6.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#laplacian-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.7.</span> <span class="nav-text">7. Laplacian 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-6"><span class="nav-number">3.7.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-6"><span class="nav-number">3.7.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-6"><span class="nav-number">3.7.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-6"><span class="nav-number">3.7.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scharr-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-number">3.8.</span> <span class="nav-text">8. Scharr 边缘检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-7"><span class="nav-number">3.8.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-7"><span class="nav-number">3.8.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-7"><span class="nav-number">3.8.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-7"><span class="nav-number">3.8.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">相机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E5%AD%94%E6%88%90%E5%83%8F%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">1. 小孔成像模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-8"><span class="nav-number">4.1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-8"><span class="nav-number">4.1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-8"><span class="nav-number">4.1.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-8"><span class="nav-number">4.1.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E9%92%88%E5%AD%94%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E5%86%85%E5%8F%82%E5%A4%96%E5%8F%82"><span class="nav-number">4.2.</span> <span class="nav-text">2. 相机模型（针孔相机模型+内参外参）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-9"><span class="nav-number">4.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-9"><span class="nav-number">4.2.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-9"><span class="nav-number">4.2.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-9"><span class="nav-number">4.2.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%A4%B4%E7%95%B8%E5%8F%98"><span class="nav-number">4.3.</span> <span class="nav-text">3. 镜头畸变</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-10"><span class="nav-number">4.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-10"><span class="nav-number">4.3.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-10"><span class="nav-number">4.3.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-10"><span class="nav-number">4.3.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E5%8F%98%E6%8D%A2"><span class="nav-number">4.4.</span> <span class="nav-text">4. 透视变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-11"><span class="nav-number">4.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-11"><span class="nav-number">4.4.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-11"><span class="nav-number">4.4.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-11"><span class="nav-number">4.4.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%B1%BC%E7%9C%BC%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.5.</span> <span class="nav-text">5. 鱼眼模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-12"><span class="nav-number">4.5.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-12"><span class="nav-number">4.5.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-12"><span class="nav-number">4.5.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-12"><span class="nav-number">4.5.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%8B%E4%BD%93%E8%A7%86%E8%A7%89"><span class="nav-number">4.6.</span> <span class="nav-text">6. 立体视觉</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-13"><span class="nav-number">4.6.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-13"><span class="nav-number">4.6.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6-13"><span class="nav-number">4.6.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-opencv-%E4%BB%A3%E7%A0%81-13"><span class="nav-number">4.6.4.</span> <span class="nav-text">Python + OpenCV 代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">5.1.</span> <span class="nav-text">边缘提取算法对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E8%A6%81%E7%82%B9"><span class="nav-number">5.2.</span> <span class="nav-text">相机模型要点</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2025/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E4%BC%A0%E7%BB%9F%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="计算机视觉(传统篇) | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机视觉(传统篇)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-03 20:17:58" itemprop="dateCreated datePublished" datetime="2025-08-03T20:17:58+08:00">2025-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-04 00:40:51" itemprop="dateModified" datetime="2025-08-04T00:40:51+08:00">2025-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<p>前言：这篇blog的最初写作目的是为了把cv初步的方法和其代码一同学习，但是后期发现特征提取部分的方法还是过于复杂的，一篇文章写完不太现实。所以决定这篇文章就按照大纲形式收集下cv各个模块的常用方法以及初步代码(不保真)，以做后续查找使用。 PS:主要是机器学习部分的学习，没有涉及深度的内容,深度学习的处理之后会继续写。</p>
+<h2 id="图像和视频">图像和视频</h2>
+<h3 id="图像的取样和量化">图像的取样和量化</h3>
+<p>图像的取样与量化是数字图像处理的基础，用于将连续的现实世界图像转换为离散的数字形式。</p>
+<h4 id="取样sampling">取样(Sampling):</h4>
+<ul>
+<li>定义：将连续的空间信号（如现实世界的图像）分解为离散像素点网络</li>
+<li>过程：通过在空间上以固定间隔（分辨率）采集图像的强度值，将连续图像分割为像素网格。例如，一个 1920x1080 的图像表示在水平和垂直方向上分别采样了 1920 和 1080 次。 #### 量化(Quantization):</li>
+<li>定义：将连续的像素强度值（通常是光强或颜色值）映射到离散的数值范围。</li>
+<li>过程：将像素的强度值（通常为浮点数）离散化为有限的整数级别。例如，8位灰度图像将强度值量化为 0 到 255 的 256 个级别。</li>
+<li>影响：量化级别越高，图像的灰度或颜色表现越细腻，但存储需求也增加。过低的量化级别会导致<strong>伪轮廓（False Contouring）</strong>，即图像出现明显的颜色或灰度分层。</li>
+<li>数学表示：假设原始强度值范围为<span class="math inline">\([I_{\text{min}}, I_{\text{max}}]\)</span>，量化为 <span class="math inline">\(L\)</span> 级，量化公式为：<span class="math display">\[I_{\text{quantized}} = \text{round}\left(\frac{I - I_{\text{min}}}{I_{\text{max}} - I_{\text{min}}} \cdot (L-1)\right)\]</span> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>,cv2.IMREAD_GRAYSCALE)</span><br><span class="line">levels=<span class="number">16</span> <span class="comment"># 减少灰度级别到16级</span></span><br><span class="line">quantized_img = np.floor_divide(img, <span class="number">256</span> // levels) * (<span class="number">256</span> // levels) <span class="comment"># np.floor_divide 取整 // 除法取整</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="滤波">滤波</h3>
+<p>滤波是图像处理中用于增强、平滑或提取特征的操作，通过对图像像素值进行加权运算来实现。</p>
+<ul>
+<li>定义：滤波通过一个卷积核（滤波器）对图像进行处理，改变像素值以实现平滑、锐化、边缘检测等效果。</li>
+<li>类型：
+<ul>
+<li>低通滤波(<strong>Low-pass Filtering</strong>)：平滑图像，减少噪声。比如说中值滤波、均值滤波、高斯滤波。</li>
+<li>高通滤波(<strong>High-pass Filtering</strong>)：突出图像的高频部分，如边缘或细节，常用于边缘检测（如 Sobel 滤波器）。</li>
+<li>带通滤波：保留特定频率范围，常用于特征提取。</li>
+</ul></li>
+<li>实现：通过卷积操作（详见“卷积”部分）将滤波核应用于图像。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">blur=cv2.blur(img,(<span class="number">3</span>*<span class="number">3</span>)) <span class="comment"># 均值滤波</span></span><br><span class="line">sobel_x = cv2.Sobel(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line"><span class="comment"># cv2.Sobel(src, ddepth, dx, dy, ksize): 计算 Sobel 边缘。</span></span><br><span class="line"><span class="comment"># - src: 输入图像。</span></span><br><span class="line"><span class="comment"># - ddepth: 输出图像深度（如 cv2.CV_64F 表示 64 位浮点数以保留负值）。</span></span><br><span class="line"><span class="comment"># - dx, dy: x 和 y 方向的导数阶数（dx=1, dy=0 表示水平边缘）。</span></span><br><span class="line"><span class="comment"># - ksize: 核大小（奇数，如 3）。</span></span><br><span class="line"><span class="comment"># - 返回: 边缘强度图像。</span></span><br></pre></td></tr></table></figure>
+<h3 id="直方图">直方图</h3>
+<p>直方图是统计图像像素强度分布的工具，用于分析图像的亮度或颜色特性。</p>
+<ul>
+<li><p><strong>定义</strong>：直方图表示图像中每个强度级别（或颜色通道值）的像素数量。</p>
+<ul>
+<li>对于灰度图像，直方图通常表示 0 到 255 的灰度级别的像素分布。</li>
+<li>对于彩色图像，可以分别对 R、G、B 通道生成直方图。</li>
+</ul></li>
+<li><p><strong>用途</strong>：</p>
+<ul>
+<li>分析图像的亮度分布（例如，判断图像是否过暗或过亮）。</li>
+<li>作为特征用于图像检索或分类。</li>
+<li>指导直方图均衡化等增强算法。</li>
+</ul></li>
+<li><p><strong>计算</strong>：统计每个强度级别的像素数量，绘制为柱状图（或曲线）。</p>
+<ul>
+<li>数学表示：对于灰度值 iii（0 到 255），直方图 h(i)h(i)h(i) 表示强度值为 iii 的像素数。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算直方图</span></span><br><span class="line">hist = cv2.calcHist([img], [<span class="number">0</span>], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br></pre></td></tr></table></figure> ### 上采样</li>
+</ul></li>
+<li><p><strong>定义</strong>：增加图像的分辨率（像素数量），通常用于图像放大。</p></li>
+<li><p><strong>方法</strong>：</p>
+<ul>
+<li><strong>插值法</strong>：如最近邻插值、双线性插值或双三次插值（见“插值”部分）。</li>
+<li><strong>超分辨率</strong>：使用机器学习模型（如深度卷积网络）预测高分辨率细节。</li>
+</ul></li>
+<li><p><strong>应用</strong>：</p>
+<ul>
+<li>图像放大（例如，显示器适配）。</li>
+<li>增强图像细节（例如，超分辨率重建）。</li>
+</ul></li>
+<li><p><strong>挑战</strong>：上采样可能引入模糊或伪影，需选择合适的插值或模型。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上采样（放大 2 倍）</span></span><br><span class="line">upsampled = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">2</span>, fy=<span class="number">2</span>, interpolation=cv2.INTER_LINEAR)</span><br><span class="line"><span class="comment"># cv2.resize(src, dsize, fx, fy, interpolation): 调整图像大小。</span></span><br><span class="line"><span class="comment"># - src: 输入图像。</span></span><br><span class="line"><span class="comment"># - dsize: 输出图像尺寸（若为 None，则由 fx, fy 决定）。</span></span><br><span class="line"><span class="comment"># - fx, fy: x 和 y 方向的缩放因子（如 fx=2 表示宽度放大 2 倍）。</span></span><br><span class="line"><span class="comment"># - interpolation: 插值方法，如 cv2.INTER_LINEAR（双线性插值）。</span></span><br><span class="line"><span class="comment"># - 返回: 调整大小后的图像。</span></span><br></pre></td></tr></table></figure> ### 下采样</p></li>
+<li><p><strong>定义</strong>：减少图像的分辨率（像素数量），通常用于图像缩小或减少计算量。</p></li>
+<li><p><strong>方法</strong>：</p>
+<ul>
+<li><strong>直接抽样</strong>：每隔固定间隔取一个像素（可能导致混叠）。</li>
+<li><strong>平滑后抽样</strong>：先应用低通滤波（如高斯模糊）去除高频分量，再抽样以避免混叠。</li>
+</ul></li>
+<li><p><strong>应用</strong>：</p>
+<ul>
+<li>图像压缩（减少存储需求）。</li>
+<li>构建图像金字塔（用于多尺度分析）。</li>
+</ul></li>
+<li><p><strong>挑战</strong>：下采样会丢失细节，需平衡分辨率与信息保留。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先高斯模糊以避免混叠</span></span><br><span class="line">blurred = cv2.GaussianBlur(img, (<span class="number">5</span>, <span class="number">5</span>), <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 下采样（缩小 0.5 倍）</span></span><br><span class="line">downsampled = cv2.resize(blurred, <span class="literal">None</span>, fx=<span class="number">0.5</span>, fy=<span class="number">0.5</span>, interpolation=cv2.INTER_LINEAR)</span><br><span class="line"><span class="comment"># cv2.GaussianBlur(src, ksize, sigmaX): 应用高斯模糊。</span></span><br><span class="line"><span class="comment"># - src: 输入图像。</span></span><br><span class="line"><span class="comment"># - ksize: 核大小，元组 (width, height)，必须为奇数（如 (5, 5)）。</span></span><br><span class="line"><span class="comment"># - sigmaX: x 方向高斯核标准差，0 表示自动计算。</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h3 id="卷积">卷积</h3>
+<p>卷积是图像处理和机器学习中的核心操作，用于特征提取和滤波。</p>
+<ul>
+<li><strong>定义</strong>：通过一个小的滤波核（Kernel 或 Filter）在图像上滑动，计算核与图像区域的加权和，生成新的像素值。</li>
+<li><strong>数学表示</strong>： 对于图像<span class="math inline">\(I(x, y)\)</span> 和核 <span class="math inline">\(K(m, n)\)</span>，卷积结果为： <span class="math inline">\(O(x, y) = \sum_{m} \sum_{n} I(x+m, y+n) \cdot K(m, n)\)</span> 其中 <span class="math inline">\(O(x, y)\)</span> 是输出图像的像素值。</li>
+<li><strong>应用</strong>：
+<ul>
+<li>图像平滑（均值滤波、高斯滤波）。</li>
+<li>边缘检测（Sobel、Prewitt 算子）。</li>
+<li>特征提取（卷积神经网络 CNN 的核心操作）。</li>
+</ul></li>
+<li><strong>注意</strong>：
+<ul>
+<li>核大小通常为奇数（如 3x3、5x5），以确保中心像素对称。</li>
+<li>边界处理：常用填充（Padding）方式，如零填充或镜像填充。</li>
+</ul></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 3x3 锐化核</span></span><br><span class="line">kernel = np.array([[<span class="number">0</span>, -<span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">				  [-<span class="number">1</span>, <span class="number">5</span>, -<span class="number">1</span>],</span><br><span class="line">				  [<span class="number">0</span>, -<span class="number">1</span>, <span class="number">0</span>]], dtype=np.float32)</span><br><span class="line"><span class="comment"># 应用卷积</span></span><br><span class="line">convolved = cv2.filter2D(img, -<span class="number">1</span>, kernel)</span><br><span class="line"><span class="comment"># cv2.filter2D(src, ddepth, kernel): 应用自定义卷积核。</span></span><br><span class="line"><span class="comment"># - src: 输入图像。</span></span><br><span class="line"><span class="comment"># - ddepth: 输出图像深度，-1 表示与输入相同。</span></span><br><span class="line"><span class="comment"># - kernel: 卷积核（NumPy 数组）。</span></span><br><span class="line"><span class="comment"># - 返回: 卷积后的图像。</span></span><br></pre></td></tr></table></figure>
+<h3 id="直方图均衡化算法">直方图均衡化算法</h3>
+<p>直方图均衡化是一种增强图像对比度的方法，通过重新分配像素强度值使直方图更均匀。</p>
+<ul>
+<li><strong>原理</strong>：
+<ul>
+<li>计算图像的灰度直方图。</li>
+<li>计算累积分布函数（CDF，Cumulative Distribution Function）： <span class="math display">\[CDF(i) = \sum_{k=0}^{i} h(k)\]</span> 其中 <span class="math inline">\(h(k)\)</span> 是直方图值，<span class="math inline">\(i\)</span>是灰度级别。</li>
+<li>归一化 CDF 并映射到目标范围（通常为 0 到 255）： <span class="math display">\[I_{\text{new}}(x, y) = \text{round}\left(\frac{CDF(I(x, y)) - CDF_{\text{min}}}{N - 1} \cdot (L-1)\right)\]</span>其中 <span class="math inline">\(N\)</span> 是像素总数，<span class="math inline">\(L\)</span>是量化级别数（如 256）。</li>
+</ul></li>
+<li><strong>步骤</strong>：
+<ol type="1">
+<li>计算直方图 <span class="math inline">\(h(i)\)</span>。</li>
+<li>计算 CDF。</li>
+<li>归一化并映射像素值。</li>
+</ol></li>
+<li><strong>效果</strong>：
+<ul>
+<li>增强图像对比度，尤其对低对比度图像效果显著。</li>
+<li>可能放大噪声或导致不自然的对比度增强。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直方图均衡化</span></span><br><span class="line">equalized = cv2.equalizeHist(img)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h3 id="最近邻差值nearest-neighbor-interpolation">最近邻差值（Nearest Neighbor Interpolation）</h3>
+<ul>
+<li><strong>定义</strong>：一种简单的插值方法，用于上采样或下采样，选取距离目标点最近的像素值作为新像素值。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>计算简单，速度快。</li>
+<li>结果可能出现块状伪影（“马赛克”效应），不平滑。</li>
+</ul></li>
+<li><strong>应用</strong>：适合对像素级精度要求高的场景（如像素艺术放大）。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最近邻插值（放大 2 倍）</span></span><br><span class="line">nearest = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">2</span>, fy=<span class="number">2</span>, interpolation=cv2.INTER_NEAREST)</span><br></pre></td></tr></table></figure> ### 单/双线性差值（Bilinear Interpolation）</li>
+<li><strong>单线性插值</strong>：
+<ul>
+<li>定义：在单一维度上使用线性插值，基于相邻两个点的距离加权平均。</li>
+<li>公式：对于点 <span class="math inline">\(x\)</span> 在 <span class="math inline">\(x_0\)</span> 和 <span class="math inline">\(x_1\)</span> 之间，值 <span class="math inline">\(f(x)\)</span> 为： <span class="math display">\[
+f(x) = f(x_0) + \frac{x - x_0}{x_1 - x_0} \cdot (f(x_1) - f(x_0))
+\]</span></li>
+</ul></li>
+<li><strong>双线性插值</strong>：
+<ul>
+<li>定义：在二维空间上扩展单线性插值，使用四个邻近像素的加权平均。</li>
+<li>公式：对目标点 <span class="math inline">\((x, y)\)</span>，基于四个角点 <span class="math inline">\((x_0, y_0), (x_0, y_1), (x_1, y_0), (x_1, y_1)\)</span>，计算： <span class="math display">\[
+f(x, y) = (1-w_x)(1-w_y)f(x_0, y_0) + w_x(1-w_y)f(x_1, y_0) + (1-w_x)w_y f(x_0, y_1) + w_x w_y f(x_1, y_1)
+\]</span> 其中 <span class="math inline">\(w_x = \frac{x - x_0}{x_1 - x_0}\)</span>，<span class="math inline">\(w_y = \frac{y - y_0}{y_1 - y_0}\)</span>。</li>
+</ul></li>
+<li><strong>特点</strong>：
+<ul>
+<li>比最近邻插值更平滑，结果更自然。</li>
+<li>计算复杂度适中，广泛用于图像缩放。</li>
+</ul></li>
+<li><strong>应用</strong>：
+<ul>
+<li>图像放大/缩小（如 OpenCV 的 <code>cv2.resize</code>）。</li>
+<li>纹理映射（如 3D 渲染）。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 双线性插值（放大 2 倍）</span></span><br><span class="line">bilinear = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">2</span>, fy=<span class="number">2</span>, interpolation=cv2.INTER_LINEAR)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h2 id="特征选择与特征提取">特征选择与特征提取</h2>
+<h3 id="特征选择与特征提取概述">特征选择与特征提取概述</h3>
+<h4 id="特征选择-feature-selection">特征选择 (Feature Selection)</h4>
+<ul>
+<li><strong>定义</strong>: 从原始特征集合中选择一个子集，保留最相关、最具区分度的特征，去除冗余或无关特征。</li>
+<li><strong>目标</strong>: 降低维度、减少计算量、避免过拟合、提高模型可解释性。</li>
+<li><strong>方法分类</strong>:
+<ul>
+<li><strong>过滤法 (Filter Methods)</strong>: 基于统计指标（如方差、相关系数）选择特征，独立于模型。</li>
+<li><strong>包装法 (Wrapper Methods)</strong>: 通过模型性能（如交叉验证）评估特征子集。</li>
+<li><strong>嵌入法 (Embedded Methods)</strong>: 在模型训练过程中进行特征选择（如 LASSO 回归）。</li>
+</ul></li>
+<li><strong>优点</strong>: 保留原始特征的物理意义，计算效率较高。</li>
+<li><strong>缺点</strong>: 可能忽略特征之间的复杂关系。</li>
+</ul>
+<h4 id="特征提取-feature-extraction">特征提取 (Feature Extraction)</h4>
+<ul>
+<li><strong>定义</strong>: 将原始高维数据通过变换（如线性或非线性映射）转换为新的低维特征空间，生成新的特征表示。</li>
+<li><strong>目标</strong>: 提取更有代表性的特征，捕捉数据中的关键模式或结构。</li>
+<li><strong>方法分类</strong>:
+<ul>
+<li><strong>线性方法</strong>: 如主成分分析 (PCA)、线性判别分析 (LDA)。</li>
+<li><strong>非线性方法</strong>: 如 t-SNE、核 PCA、深度学习特征提取。</li>
+</ul></li>
+<li><strong>优点</strong>: 能捕捉复杂模式，适用于高维数据。</li>
+<li><strong>缺点</strong>: 新特征可能丧失物理意义，计算复杂度较高。</li>
+</ul>
+<h4 id="差异">差异</h4>
+<ul>
+<li><strong>输入输出</strong>: 特征选择从原始特征中挑选子集，输出是原始特征的子集；特征提取生成新的特征表示。</li>
+<li><strong>计算复杂度</strong>: 特征选择通常比特征提取简单。</li>
+<li><strong>应用场景</strong>: 特征选择适合解释性要求高的场景；特征提取适合高维数据或需要捕捉复杂模式的场景。</li>
+</ul>
+<hr />
+<h3 id="特征选择与特征提取原理">特征选择与特征提取原理</h3>
+<h4 id="特征选择原理">特征选择原理</h4>
+<p>特征选择的目的是从原始特征集合中挑选一个子集，保留最具区分度、最相关的特征，减少冗余和噪声。以下是其核心原理和数学基础：</p>
+<ul>
+<li><p><strong>目标</strong>: 最大化模型性能（如分类精度），最小化特征数量以降低计算复杂度和过拟合风险。</p></li>
+<li><p><strong>数学表示</strong>: - 给定特征集 <span class="math inline">\(X = \{x_1, x_2, \dots, x_n\}\)</span>（每个 <span class="math inline">\(x_i\)</span> 是特征向量），目标是选择子集<span class="math inline">\(S\subseteq \{1, 2, \dots, n\}\)</span>，使得目标函数 <span class="math inline">\(J(S)\)</span>（如分类准确率）最大化： <span class="math display">\[
+  S^* = \arg\max_{S} J(S), \quad \text{s.t.} \ |S| \leq k
+  \]</span> 其中 <span class="math inline">\(k\)</span> 是期望的特征数量。</p></li>
+<li><p><strong>方法分类</strong>: - <strong>过滤法 (Filter Methods)</strong>: 使用统计指标（如方差、相关系数、互信息）评估特征的重要性，独立于模型。例如，方差阈值方法移除方差低于某一值的特征： <span class="math display">\[
+  \text{Var}(x_i) = \frac{1}{m} \sum_{j=1}^m (x_{i,j} - \mu_i)^2
+  \]</span> 其中 <span class="math inline">\(\mu_i\)</span>是特征 <span class="math inline">\(x_i\)</span>的均值，<span class="math inline">\(m\)</span>是样本数。 - <strong>包装法 (Wrapper Methods)</strong>: 通过模型性能（如交叉验证得分）迭代评估特征子集。例如，递归特征消除 (RFE) 通过模型权重或重要性排序特征，逐步移除不重要特征。 - <strong>嵌入法 (Embedded Methods)</strong>: 在模型训练过程中进行特征选择。例如，L1 正则化 (LASSO) 通过惩罚项使不重要特征的权重趋于零： <span class="math display">\[
+  \min_w \left( \frac{1}{m} \sum_{i=1}^m (y_i - w^T x_i)^2 + \lambda \|w\|_1 \right)
+  \]</span> 其中 <span class="math inline">\(\lambda\)</span>控制正则化强度。</p></li>
+</ul>
+<h4 id="特征提取原理">特征提取原理</h4>
+<p>特征提取通过变换将原始高维数据映射到低维空间，生成新的特征表示，捕捉数据的关键模式。</p>
+<ul>
+<li><strong>目标</strong>: 提取更具代表性的特征，降低维度，同时保留或增强数据区分能力。</li>
+<li><strong>数学表示</strong>:
+<ul>
+<li>给定数据矩阵 <span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span>（<span class="math inline">\(m\)</span> 个样本，<span class="math inline">\(n\)</span> 个特征），特征提取寻找变换函数 <span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}^k\)</span>（<span class="math inline">\(k &lt; n\)</span>），使得新特征 <span class="math inline">\(Z = f(X)\)</span> 更适合后续任务。</li>
+<li>线性方法（如 PCA）通过矩阵分解或投影实现： <span class="math display">\[
+Z = X \cdot W
+\]</span> 其中 <span class="math inline">\(W \in \mathbb{R}^{n \times k}\)</span> 是变换矩阵。</li>
+<li>非线性方法（如 t-SNE）通过优化复杂目标函数（如 KL 散度）实现降维。</li>
+</ul></li>
+<li><strong>方法分类</strong>:
+<ul>
+<li><strong>线性方法</strong>: 主成分分析 (PCA)、线性判别分析 (LDA)。</li>
+<li><strong>非线性方法</strong>: t-SNE、核 PCA、深度学习特征提取。</li>
+<li><strong>局部特征提取</strong>: 如 SIFT、ORB、HOG，专注于图像局部不变特征。</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="扩展的特征选择方法及代码">扩展的特征选择方法及代码</h3>
+<p>以下介绍三种特征选择方法：方差阈值（过滤法）、递归特征消除 (RFE, 包装法)、L1 正则化 (嵌入法)。</p>
+<h4 id="方差阈值过滤法">方差阈值（过滤法）</h4>
+<ul>
+<li><strong>原理</strong>: 移除方差低于阈值的特征，因为低方差特征变化小，区分能力弱。</li>
+<li><strong>数学</strong>: 计算每个特征的方差，选择方差大于阈值 <span class="math inline">\(\theta\)</span> 的特征： <span class="math display">\[
+\text{Var}(x_i) \geq \theta
+\]</span></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并转换为灰度</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将图像展平为一维特征向量（每像素作为一个特征）</span></span><br><span class="line">features = img.reshape(-<span class="number">1</span>, img.shape[<span class="number">0</span>] * img.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 应用方差阈值选择</span></span><br><span class="line">selector = VarianceThreshold(threshold=<span class="number">10.0</span>)</span><br><span class="line">selected_features = selector.fit_transform(features)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码将图像像素作为特征，使用 <code>VarianceThreshold</code> 移除方差低于 10 的特征。</p>
+<hr />
+<h4 id="递归特征消除-rfe-包装法">递归特征消除 (RFE, 包装法)</h4>
+<ul>
+<li><strong>原理</strong>: 使用模型（如 SVM）评估特征重要性，递归移除最不重要的特征，直到达到指定数量。</li>
+<li><strong>数学</strong>: 对于模型权重 <span class="math inline">\(w\)</span>，特征重要性基于 <span class="math inline">\(|w_i|\)</span>，移除最小值后重新训练。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> RFE</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟数据：读取图像并提取简单特征</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">features = np.array([</span><br><span class="line">    [np.mean(img), np.std(img), np.<span class="built_in">max</span>(img)],  <span class="comment"># 特征：均值、标准差、最大值</span></span><br><span class="line">    [np.mean(img[::<span class="number">2</span>, ::<span class="number">2</span>]), np.std(img[::<span class="number">2</span>, ::<span class="number">2</span>]), np.<span class="built_in">max</span>(img[::<span class="number">2</span>, ::<span class="number">2</span>])], <span class="comment"># 隔1行下采样</span></span><br><span class="line">    [np.mean(img[::<span class="number">4</span>, ::<span class="number">4</span>]), np.std(img[::<span class="number">4</span>, ::<span class="number">4</span>]), np.<span class="built_in">max</span>(img[::<span class="number">4</span>, ::<span class="number">4</span>])], <span class="comment"># 隔3行下采样</span></span><br><span class="line">])</span><br><span class="line">labels = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>])  <span class="comment"># 模拟标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 SVM 和 RFE 选择特征</span></span><br><span class="line">estimator = SVC(kernel=<span class="string">&quot;linear&quot;</span>)</span><br><span class="line">selector = RFE(estimator, n_features_to_select=<span class="number">2</span>)</span><br><span class="line">selector = selector.fit(features, labels)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码提取图像均值、标准差、最大值作为特征，使用 RFE 选择 2 个最重要特征。需更多样本和标签以实际应用。</p>
+<hr />
+<h4 id="l1-正则化嵌入法">L1 正则化（嵌入法）</h4>
+<ul>
+<li><strong>原理</strong>: 通过 L1 正则化（如 LASSO）使不重要特征的权重趋于零，自动选择特征。</li>
+<li><strong>数学</strong>: 优化目标： <span class="math display">\[
+\min_w \left( \frac{1}{m} \sum_{i=1}^m (y_i - w^T x_i)^2 + \lambda \|w\|_1 \right)
+\]</span></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> Lasso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并提取简单特征</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">features = np.array([</span><br><span class="line">    [np.mean(img), np.std(img), np.<span class="built_in">max</span>(img)],</span><br><span class="line">    [np.mean(img[::<span class="number">2</span>, ::<span class="number">2</span>]), np.std(img[::<span class="number">2</span>, ::<span class="number">2</span>]), np.<span class="built_in">max</span>(img[::<span class="number">2</span>, ::<span class="number">2</span>])],</span><br><span class="line">    [np.mean(img[::<span class="number">4</span>, ::<span class="number">4</span>]), np.std(img[::<span class="number">4</span>, ::<span class="number">4</span>]), np.<span class="built_in">max</span>(img[::<span class="number">4</span>, ::<span class="number">4</span>])],</span><br><span class="line">])</span><br><span class="line">labels = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>])  <span class="comment"># 模拟标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 LASSO 进行特征选择</span></span><br><span class="line">lasso = Lasso(alpha=<span class="number">0.1</span>)  <span class="comment"># alpha 控制正则化强度</span></span><br><span class="line">lasso.fit(features, labels)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码使用 LASSO 回归选择特征，非零权重的特征被选中。</p>
+<h3 id="扩展的特征提取方法及代码">扩展的特征提取方法及代码</h3>
+<p>以下介绍五种特征提取方法：主成分分析 (PCA)、线性判别分析 (LDA)、SIFT、ORB 和 HOG。</p>
+<h4 id="主成分分析-pca">主成分分析 (PCA)</h4>
+<ul>
+<li><strong>原理</strong>: 通过协方差矩阵的特征分解，将数据投影到方差最大的方向，降低维度，无监督。</li>
+<li><strong>数学</strong>:
+<ol type="1">
+<li>标准化数据：<span class="math inline">\(X_{\text{norm}} = (X - \mu)/\sigma\)</span>。</li>
+<li>计算协方差矩阵：<span class="math inline">\(C = \frac{1}{m} X_{\text{norm}}^T X_{\text{norm}}\)</span>。</li>
+<li>特征分解：<span class="math inline">\(C = W \Lambda W^T\)</span>，选择前 <span class="math inline">\(k\)</span> 个特征向量 <span class="math inline">\(W_k\)</span>。</li>
+<li>投影：<span class="math inline">\(Z = X_{\text{norm}} \cdot W_k\)</span>.</li>
+</ol></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并转换为灰度</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"><span class="keyword">if</span> img <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;Image not found or invalid path&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取 8x8 图像块作为样本</span></span><br><span class="line">patch_size = <span class="number">8</span></span><br><span class="line">patches = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, img.shape[<span class="number">0</span>] - patch_size + <span class="number">1</span>, patch_size):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, img.shape[<span class="number">1</span>] - patch_size + <span class="number">1</span>, patch_size):</span><br><span class="line">        patch = img[i:i+patch_size, j:j+patch_size].flatten()</span><br><span class="line">        patches.append(patch)</span><br><span class="line">features = np.array(patches)  <span class="comment"># 形状: (n_patches, patch_size * patch_size)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 动态选择 n_components</span></span><br><span class="line">n_components = <span class="built_in">min</span>(<span class="number">3</span>, <span class="built_in">min</span>(features.shape))  <span class="comment"># 最多 3 维</span></span><br><span class="line">pca = PCA(n_components=n_components)</span><br><span class="line">reduced_features = pca.fit_transform(features)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重构图像（仅用于展示）</span></span><br><span class="line">reconstructed = pca.inverse_transform(reduced_features)</span><br><span class="line">reconstructed_patches = reconstructed.reshape(-<span class="number">1</span>, patch_size, patch_size)</span><br><span class="line"><span class="comment"># 将 patches 重新拼接为图像（近似）</span></span><br><span class="line">h, w = img.shape</span><br><span class="line">n_patches_h = (h - patch_size + <span class="number">1</span>) // patch_size</span><br><span class="line">n_patches_w = (w - patch_size + <span class="number">1</span>) // patch_size</span><br><span class="line">reconstructed_img = np.zeros((h, w))</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_patches_h):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n_patches_w):</span><br><span class="line">        reconstructed_img[i*patch_size:(i+<span class="number">1</span>)*patch_size, j*patch_size:(j+<span class="number">1</span>)*patch_size] = reconstructed_patches[count]</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存结果</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;pca_reconstructed.jpg&#x27;</span>, reconstructed_img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(reconstructed_img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">f&#x27;PCA Reconstructed (n_components=<span class="subst">&#123;n_components&#125;</span>)&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印方差解释率</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Features shape:&quot;</span>, features.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Explained variance ratio:&quot;</span>, pca.explained_variance_ratio_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cumulative variance ratio:&quot;</span>, pca.explained_variance_ratio_.cumsum())</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码将图像像素降维到 2 维并重构，展示 PCA 效果。</p>
+<hr />
+<h4 id="线性判别分析-lda">线性判别分析 (LDA)</h4>
+<ul>
+<li><strong>原理</strong>: 最大化类间方差、最小化类内方差，适用于监督学习，一般需要多张图片，因为单一张图片标签难以提取。</li>
+<li><strong>数学</strong>:
+<ol type="1">
+<li>计算类内散布矩阵 <span class="math inline">\(S_W\)</span> 和类间散布矩阵 <span class="math inline">\(S_B\)</span>： <span class="math display">\[
+S_W = \sum_{c} \sum_{i \in c} (x_i - \mu_c)(x_i - \mu_c)^T, \quad S_B = \sum_{c} n_c (\mu_c - \mu)(\mu_c - \mu)^T
+\]</span></li>
+<li>求解广义特征值问题：<span class="math inline">\(S_W^{-1} S_B w = \lambda w\)</span>，取前 <span class="math inline">\(k\)</span> 个特征向量。</li>
+</ol></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.discriminant_analysis <span class="keyword">import</span> LinearDiscriminantAnalysis</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取两张图像并转换为灰度</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;image1.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;image2.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"><span class="keyword">if</span> img1 <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> img2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;Image not found or invalid path&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取 8x8 图像块作为样本</span></span><br><span class="line">patch_size = <span class="number">8</span></span><br><span class="line">patches = []</span><br><span class="line">labels = [] <span class="comment"># 监督类别</span></span><br><span class="line"><span class="keyword">for</span> img, label <span class="keyword">in</span> [(img1, <span class="number">0</span>), (img2, <span class="number">1</span>)]:  <span class="comment"># 图像1: 类别0, 图像2: 类别1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, img.shape[<span class="number">0</span>] - patch_size + <span class="number">1</span>, patch_size):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, img.shape[<span class="number">1</span>] - patch_size + <span class="number">1</span>, patch_size):</span><br><span class="line">            patch = img[i:i+patch_size, j:j+patch_size].flatten()</span><br><span class="line">            patches.append(patch)</span><br><span class="line">            labels.append(label)</span><br><span class="line">features = np.array(patches)  <span class="comment"># 形状: (n_patches, 64)</span></span><br><span class="line">labels = np.array(labels)  <span class="comment"># 形状: (n_patches,)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 动态选择 n_components（LDA 最多 C-1 维，C 为类别数）</span></span><br><span class="line">n_classes = <span class="built_in">len</span>(np.unique(labels))  <span class="comment"># 类别数</span></span><br><span class="line">n_components = <span class="built_in">min</span>(<span class="number">1</span>, n_classes - <span class="number">1</span>, <span class="built_in">min</span>(features.shape))  <span class="comment"># 2 类时最多 1 维</span></span><br><span class="line">lda = LinearDiscriminantAnalysis(n_components=n_components)</span><br><span class="line">reduced_features = lda.fit_transform(features, labels)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Features shape:&quot;</span>, features.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Reduced features shape:&quot;</span>, reduced_features.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Explained variance ratio:&quot;</span>, lda.explained_variance_ratio_)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码模拟两张图像（需 <code>image1.jpg</code> 和 <code>image2.jpg</code>），使用 LDA 降维到 1 维。实际应用需更多样本。</p>
+<h4 id="sift-特征提取">SIFT 特征提取</h4>
+<h4 id="基本概念">基本概念</h4>
+<ul>
+<li><strong>目标</strong>：检测图像中的关键点（角点等），并为每个关键点生成描述子，用于图像匹配、目标识别等任务。</li>
+<li><strong>特性</strong>：
+<ul>
+<li><strong>尺度不变</strong>：通过尺度空间检测，适应不同大小的目标。</li>
+<li><strong>旋转不变</strong>：通过分配主方向，描述子相对于方向归一化。</li>
+<li><strong>光照鲁棒</strong>：基于梯度信息，对亮度变化不敏感。</li>
+</ul></li>
+<li><strong>应用</strong>：图像匹配、物体识别、3D重建。</li>
+</ul>
+<h4 id="sift算法步骤">SIFT算法步骤</h4>
+<ol type="1">
+<li><strong>尺度空间极值检测</strong>：
+<ul>
+<li>构建高斯金字塔（不同尺度和模糊程度的图像）。</li>
+<li>计算相邻尺度的高斯差分（DoG，Difference of Gaussian）： <span class="math display">\[D(x, y, \sigma) = L(x, y, k\sigma) - L(x, y, \sigma) \]</span>其中<span class="math inline">\(L(x, y, \sigma) = G(x, y, \sigma) * I(x, y)\)</span>是高斯模糊图像。其实本质是求二次偏导，其函数形式与DoG十分类似，故使用DoG函数。</li>
+<li>在DoG中寻找局部极值点（3D空间：x, y, 尺度）。</li>
+</ul></li>
+<li><strong>关键点定位</strong>：
+<ul>
+<li>过滤低对比度或边缘点，确保关键点稳定。</li>
+<li>使用泰勒展开精确定位极值点。</li>
+</ul></li>
+<li><strong>方向分配</strong>：
+<ul>
+<li>计算关键点邻域的梯度方向直方图，分配主方向（峰值方向）。</li>
+<li>使描述子对旋转不变。</li>
+</ul></li>
+<li><strong>描述子生成</strong>：
+<ul>
+<li>在关键点周围取16x16邻域，分成4x4子块。</li>
+<li>每个子块计算8个方向的梯度直方图，生成128维描述子（4x4x8=128）。</li>
+</ul></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并转换为灰度</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 SIFT 检测器</span></span><br><span class="line">sift = cv2.SIFT_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测关键点和计算描述子</span></span><br><span class="line">keypoints, descriptors = sift.detectAndCompute(img, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制关键点</span></span><br><span class="line">img_with_keypoints = cv2.drawKeypoints(img, keypoints, <span class="literal">None</span>, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存结果</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;sift_keypoints.jpg&#x27;</span>, img_with_keypoints)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.imshow(img_with_keypoints, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;SIFT Keypoints&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印关键点数量和描述子形状</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Number of keypoints: <span class="subst">&#123;<span class="built_in">len</span>(keypoints)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Descriptor shape: <span class="subst">&#123;descriptors.shape&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># cv2.SIFT_create(): 创建 SIFT 检测器。</span></span><br><span class="line"><span class="comment">#   - 返回: SIFT 对象。</span></span><br><span class="line"><span class="comment"># cv2.SIFT.detectAndCompute(image, mask): 检测关键点并计算描述子。</span></span><br><span class="line"><span class="comment">#   - image: 输入灰度图像。</span></span><br><span class="line"><span class="comment">#   - mask: 可选掩码，None 表示使用整个图像。</span></span><br><span class="line"><span class="comment">#   - 返回: 关键点列表 (keypoints) 和描述子数组 (descriptors)。</span></span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码提取 SIFT 关键点和描述子，需 <code>opencv-contrib-python</code>。</p>
+<hr />
+<h4 id="orb-特征提取">ORB 特征提取</h4>
+<ul>
+<li><strong>原理</strong>: 方向快速和旋转 BRIEF (ORB) 是一种高效的局部特征检测算法，结合 FAST 关键点检测和 BRIEF 描述子，速度快且对旋转鲁棒。但是对尺度的检测并不十分敏感。算法主要是求速度。</li>
+<li><strong>步骤</strong>:
+<ol type="1">
+<li>FAST 检测关键点。</li>
+<li>计算关键点方向。</li>
+<li>生成 BRIEF 描述子。</li>
+</ol></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并转换为灰度</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 ORB 检测器</span></span><br><span class="line">orb = cv2.ORB_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测关键点和计算描述子</span></span><br><span class="line">keypoints, descriptors = orb.detectAndCompute(img, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制关键点</span></span><br><span class="line">img_with_keypoints = cv2.drawKeypoints(img, keypoints, <span class="literal">None</span>, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存结果</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;orb_keypoints.jpg&#x27;</span>, img_with_keypoints)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.imshow(img_with_keypoints, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;ORB Keypoints&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印关键点数量和描述子形状</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Number of keypoints: <span class="subst">&#123;<span class="built_in">len</span>(keypoints)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Descriptor shape: <span class="subst">&#123;descriptors.shape&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码使用 ORB 检测关键点，速度比 SIFT 快，适合实时应用。</p>
+<hr />
+<h4 id="hog-特征提取">HOG 特征提取</h4>
+<ul>
+<li><strong>原理</strong>: 方向梯度直方图 (HOG) 通过计算图像局部区域的梯度方向直方图，生成特征描述子，常用于行人检测。</li>
+<li><strong>步骤</strong>:
+<ol type="1">
+<li>计算图像梯度（x 和 y 方向）。</li>
+<li>将图像分成小单元 (cell，一般8×8)，计算每个单元的梯度方向直方图。</li>
+<li>将单元组成块 (block，一般2×2cell)，归一化直方图。</li>
+<li>连接所有块的特征向量。</li>
+</ol></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像并转换为灰度</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图像大小以适合 HOG</span></span><br><span class="line">img = cv2.resize(img, (<span class="number">128</span>, <span class="number">64</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算 HOG 特征</span></span><br><span class="line">hog_features, hog_image = hog(img, pixels_per_cell=(<span class="number">8</span>, <span class="number">8</span>), cells_per_block=(<span class="number">2</span>, <span class="number">2</span>), visualize=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存 HOG 可视化图像</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;hog_image.jpg&#x27;</span>, hog_image * <span class="number">255</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(hog_image, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;HOG Visualization&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印 HOG 特征长度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;HOG feature length: <span class="subst">&#123;<span class="built_in">len</span>(hog_features)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>: 代码使用 <code>skimage.feature.hog</code> 计算 HOG 特征，需安装 <code>scikit-image</code> (<code>pip install scikit-image</code>)。</p>
+<hr />
+<h3 id="总结">总结</h3>
+<ul>
+<li><strong>特征选择</strong>:
+<ul>
+<li><strong>方差阈值</strong>: 简单高效，适合高维数据筛选。</li>
+<li><strong>RFE</strong>: 结合模型性能，精准但计算成本高。</li>
+<li><strong>L1 正则化</strong>: 自动选择特征，适合回归任务。</li>
+</ul></li>
+<li><strong>特征提取</strong>:
+<ul>
+<li><strong>PCA</strong>: 线性降维，适合图像压缩。</li>
+<li><strong>LDA</strong>: 监督降维，适合分类任务。</li>
+<li><strong>SIFT</strong>: 尺度不变特征，适合图像匹配。</li>
+<li><strong>ORB</strong>: 高效局部特征，适合实时应用。</li>
+<li><strong>HOG</strong>: 梯度方向特征，适合行人检测。</li>
+<li>除此之外还有SURF(基于SIFT的快速算法)、LBP(人脸识别)等 [[../TrDentityCo.png]]</li>
+</ul></li>
+<li><strong>OpenCV 应用</strong>:
+<ul>
+<li>特征选择常结合 <code>sklearn</code>，特征提取可直接使用 OpenCV 的 SIFT、ORB 或外部库的 HOG。</li>
+<li>这些方法在图像分类、目标检测、图像检索中广泛应用。</li>
+</ul></li>
+</ul>
+<h2 id="边缘提取">边缘提取</h2>
+<p>边缘提取是计算机视觉的基础任务，用于检测图像中亮度或颜色发生显著变化的区域，通常对应于物体的边界。本文记录以下常用方法<strong>Canny</strong>、<strong>Roberts</strong>、<strong>Sobel</strong>、<strong>Prewitt</strong>、<strong>Hessian特征</strong>、<strong>Haar特征</strong>、<strong>Laplacian</strong>和<strong>Scharr</strong>。</p>
+<h3 id="canny-边缘检测">1. Canny 边缘检测</h3>
+<h4 id="原理">原理</h4>
+<p>Canny 边缘检测是一种多阶段算法，旨在检测强边缘并抑制噪声。它包括以下步骤： 1. <strong>噪声抑制</strong>：使用高斯模糊平滑图像，减少噪声影响。 2. <strong>梯度计算</strong>：使用 Sobel 算子计算图像的强度梯度和方向。 3. <strong>非极大值抑制</strong>：在梯度方向上，仅保留局部最大值，抑制非边缘点。 4. <strong>双阈值检测</strong>：使用高低阈值将边缘分为强边缘、弱边缘和非边缘。 5. <strong>边缘跟踪</strong>：通过连通性分析，将弱边缘与强边缘连接，剔除孤立点。</p>
+<h4 id="优缺点">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>检测精度高，边缘定位准确。</li>
+<li>能有效抑制噪声，减少误检。</li>
+<li>提供连通性强的边缘。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>计算复杂度较高，实时性较差。</li>
+<li>对阈值选择敏感，需手动调整。</li>
+<li>对复杂背景的边缘检测可能不理想。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件">适用条件</h4>
+<ul>
+<li>适用于需要高质量边缘检测的场景，如图像分割、物体检测。</li>
+<li>适合噪声较少的图像，或经过预处理的图像。</li>
+</ul>
+<h4 id="python-opencv-代码">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Canny 边缘检测</span></span><br><span class="line">edges = cv2.Canny(img, threshold1=<span class="number">100</span>, threshold2=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="roberts-边缘检测">2. Roberts 边缘检测</h3>
+<h4 id="原理-1">原理</h4>
+<p>Roberts 算子是一种简单的边缘检测方法，使用 2x2 的卷积核计算图像的梯度。它通过以下两个核检测对角方向的边缘： - <span class="math inline">\(G_x = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix}\)</span> - <span class="math inline">\(G_y = \begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix}\)</span></p>
+<p>梯度幅值计算为：<span class="math inline">\(G = \sqrt{G_x^2 + G_y^2}\)</span>。</p>
+<h4 id="优缺点-1">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>计算简单，速度快。</li>
+<li>对对角边缘敏感。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>对噪声非常敏感，容易产生伪边缘。</li>
+<li>仅检测对角方向边缘，对水平和垂直边缘效果较差。</li>
+<li>边缘定位不精确。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-1">适用条件</h4>
+<ul>
+<li>适用于噪声极低的简单图像。</li>
+<li>适合对计算速度要求高的实时应用。</li>
+</ul>
+<h4 id="python-opencv-代码-1">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 Roberts 算子</span></span><br><span class="line">roberts_x = np.array([[<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, -<span class="number">1</span>]], dtype=np.float32)</span><br><span class="line">roberts_y = np.array([[<span class="number">0</span>, <span class="number">1</span>], [-<span class="number">1</span>, <span class="number">0</span>]], dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卷积操作</span></span><br><span class="line">edge_x = cv2.filter2D(img, -<span class="number">1</span>, roberts_x)</span><br><span class="line">edge_y = cv2.filter2D(img, -<span class="number">1</span>, roberts_y)</span><br><span class="line">edges = np.sqrt(np.square(edge_x) + np.square(edge_y)).astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<h3 id="sobel-边缘检测">3. Sobel 边缘检测</h3>
+<h4 id="原理-2">原理</h4>
+<p>Sobel 算子通过 3x3 的卷积核计算图像在水平和垂直方向的梯度，强调边缘区域。它使用以下核： - <span class="math inline">\(G_x = \begin{bmatrix} -1 &amp; 0 &amp; 1 \\ -2 &amp; 0 &amp; 2 \\ -1 &amp; 0 &amp; 1 \end{bmatrix}\)</span> - <span class="math inline">\(G_y = \begin{bmatrix} -1 &amp; -2 &amp; -1 \\ 0 &amp; 0 &amp; 0 \\ 1 &amp; 2 &amp; 1 \end{bmatrix}\)</span></p>
+<p>梯度幅值为：<span class="math inline">\(G = \sqrt{G_x^2 + G_y^2}\)</span>，方向为：<span class="math inline">\(\theta = \arctan(G_y / G_x)\)</span>。</p>
+<h4 id="优缺点-2">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>对水平和垂直边缘检测效果较好。</li>
+<li>计算简单，适合实时处理。</li>
+<li>比 Roberts 更抗噪。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>对对角边缘检测较弱。</li>
+<li>边缘可能较粗糙，定位不够精确。</li>
+<li>对高噪声图像效果较差。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-2">适用条件</h4>
+<ul>
+<li>适用于检测水平和垂直边缘的场景，如道路线检测。</li>
+<li>适合噪声适中的图像。</li>
+</ul>
+<h4 id="python-opencv-代码-2">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sobel 边缘检测</span></span><br><span class="line">sobel_x = cv2.Sobel(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">sobel_y = cv2.Sobel(img, cv2.CV_64F, <span class="number">0</span>, <span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">edges = np.sqrt(np.square(sobel_x) + np.square(sobel_y)).astype(np.uint8)  <span class="comment"># uint8是灰度格式，这里是转化成灰度图</span></span><br></pre></td></tr></table></figure>
+<h3 id="prewitt-边缘检测">4. Prewitt 边缘检测</h3>
+<h4 id="原理-3">原理</h4>
+<p>Prewitt 算子与 Sobel 类似，也是 3x3 卷积核，用于计算水平和垂直方向的梯度，但权重更均匀： - <span class="math inline">\(G_x = \begin{bmatrix} -1 &amp; 0 &amp; 1 \\ -1 &amp; 0 &amp; 1 \\ -1 &amp; 0 &amp; 1 \end{bmatrix}\)</span> - <span class="math inline">\(G_y = \begin{bmatrix} -1 &amp; -1 &amp; -1 \\ 0 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 1 \end{bmatrix}\)</span></p>
+<p>梯度幅值和方向计算同 Sobel。</p>
+<h4 id="优缺点-3">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>计算简单，速度快。</li>
+<li>对水平和垂直边缘有较好响应。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>比 Sobel 更易受噪声影响。</li>
+<li>边缘定位精度较低。</li>
+<li>对复杂纹理图像效果较差。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-3">适用条件</h4>
+<ul>
+<li>适用于简单图像的边缘检测。</li>
+<li>适合对噪声要求不高的场景。</li>
+</ul>
+<h4 id="python-opencv-代码-3">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 Prewitt 算子</span></span><br><span class="line">prewitt_x = np.array([[-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>], [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>], [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]], dtype=np.float32)</span><br><span class="line">prewitt_y = np.array([[-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>], [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]], dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卷积操作</span></span><br><span class="line">edge_x = cv2.filter2D(img, -<span class="number">1</span>, prewitt_x)</span><br><span class="line">edge_y = cv2.filter2D(img, -<span class="number">1</span>, prewitt_y)</span><br><span class="line">edges = np.sqrt(np.square(edge_x) + np.square(edge_y)).astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<h3 id="hessian-特征">5. Hessian 特征</h3>
+<h4 id="原理-4">原理</h4>
+<p>Hessian 特征基于图像的二阶导数，通过 Hessian 矩阵检测图像中的显著点（如角点或边缘）。Hessian 矩阵定义为： <span class="math display">\[ H = \begin{bmatrix} I_{xx} &amp; I_{xy} \\ I_{xy} &amp; I_{yy} \end{bmatrix} \]</span> 其中 <span class="math inline">\(I_{xx}, I_{xy}, I_{yy}\)</span> 是图像的二阶偏导数。特征点通过矩阵的行列式或特征值分析确定。</p>
+<p>在边缘检测中，Hessian 常用于检测细长结构（如血管），通过分析行列式 <span class="math inline">\(\det(H)\)</span> 或特征值。</p>
+<h4 id="优缺点-4">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>对细长边缘或线状结构检测效果好。</li>
+<li>能捕捉图像的局部几何特征。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>计算复杂度高，需计算二阶导数。</li>
+<li>对噪声敏感，需预处理。</li>
+<li>不适合检测宽边缘或复杂纹理。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-4">适用条件</h4>
+<ul>
+<li>适用于医疗图像（如血管分割）或线状结构检测。</li>
+<li>适合噪声较低或经过平滑处理的图像。</li>
+</ul>
+<h4 id="python-opencv-代码-4">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy.ndimage <span class="keyword">import</span> gaussian_laplace</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE).astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算 Hessian 矩阵的行列式（近似）</span></span><br><span class="line">sigma = <span class="number">2.0</span></span><br><span class="line">img_xx = cv2.Sobel(cv2.Sobel(img, cv2.CV_64F, <span class="number">2</span>, <span class="number">0</span>, ksize=<span class="number">3</span>), cv2.CV_64F, <span class="number">2</span>, <span class="number">0</span>, ksize=<span class="number">3</span>)</span><br><span class="line">img_yy = cv2.Sobel(cv2.Sobel(img, cv2.CV_64F, <span class="number">0</span>, <span class="number">2</span>, ksize=<span class="number">3</span>), cv2.CV_64F, <span class="number">0</span>, <span class="number">2</span>, ksize=<span class="number">3</span>)</span><br><span class="line">img_xy = cv2.Sobel(cv2.Sobel(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">3</span>), cv2.CV_64F, <span class="number">0</span>, <span class="number">1</span>, ksize=<span class="number">3</span>)</span><br><span class="line">det_H = img_xx * img_yy - img_xy ** <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化显示</span></span><br><span class="line">det_H = cv2.normalize(det_H, <span class="literal">None</span>, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX).astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original Image&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(det_H, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Hessian Determinant&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="haar-特征">6. Haar 特征</h3>
+<h4 id="原理-5">原理</h4>
+<p>Haar 特征主要用于目标检测（如人脸检测），通过计算矩形区域的像素强度差值提取特征。Haar 特征包括： - 边缘特征：检测水平或垂直边缘。 - 线特征：检测线状结构。 - 中心-环绕特征：检测中心与周围的差异。</p>
+<p>特征值计算为：白色区域像素和减去黑色区域像素和。Haar 特征通常结合积分图像加速计算。</p>
+<h4 id="优缺点-5">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>计算速度快，适合实时应用。</li>
+<li>对简单边缘和纹理特征有效。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>对复杂边缘或非矩形特征检测效果差。</li>
+<li>对光照变化和旋转敏感。</li>
+<li>需大量训练数据（如用于人脸检测）。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-5">适用条件</h4>
+<ul>
+<li>适用于目标检测（如人脸、车辆）。</li>
+<li>适合光照均匀、目标形状规则的场景。</li>
+</ul>
+<h4 id="python-opencv-代码-5">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义简单的 Haar 特征（水平边缘）</span></span><br><span class="line">haar_kernel = np.array([[<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>]], dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卷积操作</span></span><br><span class="line">haar_edges = cv2.filter2D(img, -<span class="number">1</span>, haar_kernel)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化显示</span></span><br><span class="line">haar_edges = cv2.normalize(haar_edges, <span class="literal">None</span>, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX).astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original Image&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(haar_edges, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Haar Edges&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="laplacian-边缘检测">7. Laplacian 边缘检测</h3>
+<h4 id="原理-6">原理</h4>
+<p>Laplacian 算子基于图像的二阶导数，检测亮度变化的区域。它使用以下核： <span class="math display">\[ \nabla^2 I = \begin{bmatrix} 0 &amp; 1 &amp; 0 \\ 1 &amp; -4 &amp; 1 \\ 0 &amp; 1 &amp; 0 \end{bmatrix} \]</span></p>
+<p>Laplacian 检测零交叉点作为边缘。</p>
+<h4 id="优缺点-6">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>对所有方向的边缘敏感。</li>
+<li>计算简单。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>极易受噪声影响，需预平滑。</li>
+<li>边缘可能不连续，需后处理。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-6">适用条件</h4>
+<ul>
+<li>适用于噪声低的图像。</li>
+<li>适合与高斯平滑结合使用。</li>
+</ul>
+<h4 id="python-opencv-代码-6">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 高斯平滑</span></span><br><span class="line">img_blur = cv2.GaussianBlur(img, (<span class="number">5</span>, <span class="number">5</span>), <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Laplacian 边缘检测</span></span><br><span class="line">edges = cv2.Laplacian(img_blur, cv2.CV_64F)</span><br><span class="line">edges = cv2.normalize(edges, <span class="literal">None</span>, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX).astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original Image&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(edges, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Laplacian Edges&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="scharr-边缘检测">8. Scharr 边缘检测</h3>
+<h4 id="原理-7">原理</h4>
+<p>Scharr 算子是 Sobel 的改进版，使用更精确的权重来计算梯度： - <span class="math inline">\(G_x = \begin{bmatrix} -3 &amp; 0 &amp; 3 \\ -10 &amp; 0 &amp; 10 \\ -3 &amp; 0 &amp; 3 \end{bmatrix}\)</span> - <span class="math inline">\(G_y = \begin{bmatrix} -3 &amp; -10 &amp; -3 \\ 0 &amp; 0 &amp; 0 \\ 3 &amp; 10 &amp; 3 \end{bmatrix}\)</span></p>
+<h4 id="优缺点-7">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>比 Sobel 更精确，边缘定位更好。</li>
+<li>计算速度与 Sobel 相近。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>对噪声仍较敏感。</li>
+<li>对复杂纹理效果有限。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-7">适用条件</h4>
+<ul>
+<li>适用于需要高精度边缘检测的场景。</li>
+<li>适合噪声适中的图像。</li>
+</ul>
+<h4 id="python-opencv-代码-7">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Scharr 边缘检测</span></span><br><span class="line">scharr_x = cv2.Scharr(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">scharr_y = cv2.Scharr(img, cv2.CV_64F, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">edges = np.sqrt(np.square(scharr_x) + np.square(scharr_y)).astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Original Image&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(edges, cmap=<span class="string">&#x27;gray&#x27;</span>), plt.title(<span class="string">&#x27;Scharr Edges&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="相机模型">相机模型</h2>
+<p>相机模型描述了三维世界如何通过相机投影到二维图像平面。以下是对你列出的内容（小孔成像模型、相机模型、镜头畸变、透视变换）以及补充内容（鱼眼模型、立体视觉）的详细讲解。</p>
+<h3 id="小孔成像模型">1. 小孔成像模型</h3>
+<h4 id="原理-8">原理</h4>
+<p>小孔成像模型是相机成像的理想化模型，假设光线通过一个无穷小的孔（针孔）投影到成像平面，无透镜畸变。数学表达为： <span class="math display">\[ \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = \frac{f}{Z} \begin{bmatrix} X \\ Y \\ Z \end{bmatrix} \]</span> 其中： - <span class="math inline">\((X, Y, Z)\)</span>：世界坐标。 - <span class="math inline">\((u, v)\)</span>：图像坐标。 - <span class="math inline">\(f\)</span>：焦距。 - <span class="math inline">\(Z\)</span>：物体到针孔的深度。</p>
+<h4 id="优缺点-8">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>模型简单，易于理解和计算。</li>
+<li>无畸变，适合理论分析。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>针孔会导致光量不足，实际相机需透镜。</li>
+<li>不考虑畸变，无法描述真实相机。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-8">适用条件</h4>
+<ul>
+<li>适用于教学和简单几何分析。</li>
+<li>不适合需要高精度建模的实际应用。</li>
+</ul>
+<h4 id="python-opencv-代码-8">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模拟小孔成像</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pinhole_projection</span>(<span class="params">points_3d, focal_length</span>):</span><br><span class="line">    points_2d = []</span><br><span class="line">    <span class="keyword">for</span> point <span class="keyword">in</span> points_3d:</span><br><span class="line">        X, Y, Z = point</span><br><span class="line">        u = (focal_length * X) / Z</span><br><span class="line">        v = (focal_length * Y) / Z</span><br><span class="line">        points_2d.append([u, v])</span><br><span class="line">    <span class="keyword">return</span> np.array(points_2d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 3D 点</span></span><br><span class="line">points_3d = np.array([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>], [<span class="number">2</span>, <span class="number">2</span>, <span class="number">5</span>], [<span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]])</span><br><span class="line">focal_length = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影到 2D</span></span><br><span class="line">points_2d = pinhole_projection(points_3d, focal_length)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="相机模型针孔相机模型内参外参">2. 相机模型（针孔相机模型+内参外参）</h3>
+<h4 id="原理-9">原理</h4>
+<p>相机模型是对小孔成像的扩展，考虑内参（焦距、 principal point）和外参（旋转、平移）。投影公式为： <span class="math display">\[ \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = K [R | t] \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix} \]</span> 其中： - <span class="math inline">\(K = \begin{bmatrix} f_x &amp; 0 &amp; c_x \\ 0 &amp; f_y &amp; c_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span>：内参矩阵，<span class="math inline">\(f_x, f_y\)</span> 为焦距，<span class="math inline">\(c_x, c_y\)</span> 为 principal point。 - <span class="math inline">\([R | t]\)</span>：外参矩阵，<span class="math inline">\(R\)</span> 为旋转矩阵，<span class="math inline">\(t\)</span> 为平移向量。</p>
+<h4 id="优缺点-9">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>能精确描述相机成像过程。</li>
+<li>支持 3D 重建和姿态估计。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>不考虑镜头畸变，需额外校正。</li>
+<li>标定过程复杂。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-9">适用条件</h4>
+<ul>
+<li>适用于 3D 重建、SLAM、增强现实。</li>
+<li>适合需要精确几何关系的场景。</li>
+</ul>
+<h4 id="python-opencv-代码-9">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义内参矩阵</span></span><br><span class="line">focal_length = <span class="number">500</span></span><br><span class="line">cx, cy = <span class="number">320</span>, <span class="number">240</span></span><br><span class="line">K = np.array([[focal_length, <span class="number">0</span>, cx], [<span class="number">0</span>, focal_length, cy], [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义外参（旋转矩阵和平移向量）</span></span><br><span class="line">R = np.eye(<span class="number">3</span>)</span><br><span class="line">t = np.array([[<span class="number">0</span>], [<span class="number">0</span>], [<span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 3D 点</span></span><br><span class="line">points_3d = np.array([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>], [<span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>], [<span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>]], dtype=np.float32).T</span><br><span class="line">points_3d_h = np.vstack((points_3d, np.ones((<span class="number">1</span>, points_3d.shape[<span class="number">1</span>]))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影到 2D</span></span><br><span class="line">Rt = np.hstack((R, t))</span><br><span class="line">points_2d_h = K @ Rt @ points_3d_h</span><br><span class="line">points_2d = (points_2d_h[:<span class="number">2</span>] / points_2d_h[<span class="number">2</span>]).T</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="镜头畸变">3. 镜头畸变</h3>
+<h4 id="原理-10">原理</h4>
+<p>镜头畸变是由于透镜非理想性导致的图像失真，主要包括： - <strong>径向畸变</strong>：靠近图像中心的点移向边缘（桶形畸变）或反之（枕形畸变）。模型为： <span class="math display">\[ x_d = x (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) \]</span> <span class="math display">\[ y_d = y (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) \]</span> 其中 <span class="math inline">\(r = \sqrt{x^2 + y^2}\)</span>，<span class="math inline">\(k_1, k_2, k_3\)</span> 为径向畸变系数。 - <strong>切向畸变</strong>：由于透镜与传感器不完全平行，模型为： <span class="math display">\[ x_d = x + [2 p_1 x y + p_2 (r^2 + 2 x^2)] \]</span> <span class="math display">\[ y_d = y + [p_1 (r^2 + 2 y^2) + 2 p_2 x y] \]</span></p>
+<h4 id="优缺点-10">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>校正畸变后可获得更精确的几何关系。</li>
+<li>适用于广角镜头或鱼眼镜头。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>标定过程复杂，需棋盘格或其他标定物。</li>
+<li>校正可能导致图像部分区域丢失。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-10">适用条件</h4>
+<ul>
+<li>适用于广角镜头或高精度成像系统。</li>
+<li>适合需要校正畸变的场景，如 3D 重建、SLAM。</li>
+</ul>
+<h4 id="python-opencv-代码-10">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义内参和畸变系数（需通过标定获得）</span></span><br><span class="line">K = np.array([[<span class="number">500</span>, <span class="number">0</span>, <span class="number">320</span>], [<span class="number">0</span>, <span class="number">500</span>, <span class="number">240</span>], [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">dist_coeffs = np.array([<span class="number">0.1</span>, -<span class="number">0.01</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>])  <span class="comment"># k1, k2, p1, p2, k3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 校正畸变</span></span><br><span class="line">h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">new_K, roi = cv2.getOptimalNewCameraMatrix(K, dist_coeffs, (w, h), <span class="number">1</span>, (w, h))</span><br><span class="line">undistorted_img = cv2.undistort(img, K, dist_coeffs, <span class="literal">None</span>, new_K)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="透视变换">4. 透视变换</h3>
+<h4 id="原理-11">原理</h4>
+<p>透视变换将图像从一个视角变换到另一个视角，基于单应性矩阵（Homography）。变换公式为： <span class="math display">\[ \begin{bmatrix} u&#39; \\ v&#39; \\ 1 \end{bmatrix} = H \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \]</span> 其中 <span class="math inline">\(H\)</span> 是一个 3x3 矩阵，通过至少 4 对对应点计算。</p>
+<h4 id="优缺点-11">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>能实现图像的视角变换，适用于校正倾斜或拼接。</li>
+<li>计算简单，效果直观。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>要求平面场景，非平面场景会失效。</li>
+<li>对对应点精度要求高。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-11">适用条件</h4>
+<ul>
+<li>适用于图像拼接、文档校正、增强现实。</li>
+<li>适合平面对象的视角变换。</li>
+</ul>
+<h4 id="python-opencv-代码-11">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;image.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义原始点和目标点</span></span><br><span class="line">src_points = np.float32([[<span class="number">0</span>, <span class="number">0</span>], [img.shape[<span class="number">1</span>]-<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, img.shape[<span class="number">0</span>]-<span class="number">1</span>], [img.shape[<span class="number">1</span>]-<span class="number">1</span>, img.shape[<span class="number">0</span>]-<span class="number">1</span>]])</span><br><span class="line">dst_points = np.float32([[<span class="number">0</span>, <span class="number">0</span>], [<span class="number">500</span>, <span class="number">0</span>], [<span class="number">100</span>, <span class="number">500</span>], [<span class="number">400</span>, <span class="number">500</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算单应性矩阵</span></span><br><span class="line">H, _ = cv2.findHomography(src_points, dst_points)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 透视变换</span></span><br><span class="line">warped_img = cv2.warpPerspective(img, H, (<span class="number">500</span>, <span class="number">500</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示结果</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)), plt.title(<span class="string">&#x27;Original Image&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(cv2.cvtColor(warped_img, cv2.COLOR_BGR2RGB)), plt.title(<span class="string">&#x27;Warped Image&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="鱼眼模型">5. 鱼眼模型</h3>
+<h4 id="原理-12">原理</h4>
+<p>鱼眼镜头具有超广角，导致严重畸变。鱼眼模型通常使用等距投影或其他非线性投影，校正公式为： <span class="math display">\[ r_d = f \theta \]</span> 其中 <span class="math inline">\(\theta = \arctan(r_u / f)\)</span>，<span class="math inline">\(r_d\)</span> 和 <span class="math inline">\(r_u\)</span> 分别为畸变和未畸变半径。</p>
+<h4 id="优缺点-12">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>能捕获超广角视野，适合全景成像。</li>
+<li>校正后可用于 3D 重建。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>畸变严重，校正复杂。</li>
+<li>边缘分辨率较低。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-12">适用条件</h4>
+<ul>
+<li>适用于全景相机或监控系统。</li>
+<li>适合需要超广角的场景。</li>
+</ul>
+<h4 id="python-opencv-代码-12">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取鱼眼图像</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;fisheye_image.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义内参和畸变系数</span></span><br><span class="line">K = np.array([[<span class="number">500</span>, <span class="number">0</span>, <span class="number">320</span>], [<span class="number">0</span>, <span class="number">500</span>, <span class="number">240</span>], [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">dist_coeffs = np.array([<span class="number">0.2</span>, <span class="number">0.02</span>, <span class="number">0.0</span>, <span class="number">0.0</span>])  <span class="comment"># 鱼眼畸变系数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 校正鱼眼畸变</span></span><br><span class="line">h, w = img.shape[:<span class="number">2</span>]</span><br><span class="line">mapx, mapy = cv2.initUndistortRectifyMap(K, dist_coeffs, <span class="literal">None</span>, K, (w, h), cv2.CV_32FC1)</span><br><span class="line">undistorted_img = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="立体视觉">6. 立体视觉</h3>
+<h4 id="原理-13">原理</h4>
+<p>立体视觉通过两台相机的视差计算场景深度。基本公式为： <span class="math display">\[ Z = \frac{f T}{d} \]</span> 其中： - <span class="math inline">\(Z\)</span>：深度。 - <span class="math inline">\(f\)</span>：焦距。 - <span class="math inline">\(T\)</span>：两相机基线距离。 - <span class="math inline">\(d\)</span>：视差（左图和右图对应点的水平偏移）。</p>
+<h4 id="优缺点-13">优缺点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>能直接计算 3D 深度信息。</li>
+<li>适用于机器人导航、3D 重建。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>对相机标定和匹配精度要求高。</li>
+<li>计算复杂度高，实时性较差。</li>
+</ul></li>
+</ul>
+<h4 id="适用条件-13">适用条件</h4>
+<ul>
+<li>适用于需要深度信息的场景，如自动驾驶、机器人。</li>
+<li>适合纹理丰富的场景。</li>
+</ul>
+<h4 id="python-opencv-代码-13">Python + OpenCV 代码</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">img_left = cv2.imread(<span class="string">&#x27;left_image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">img_right = cv2.imread(<span class="string">&#x27;right_image.jpg&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建立体匹配对象</span></span><br><span class="line">stereo = cv2.StereoBM_create(numDisparities=<span class="number">16</span>, blockSize=<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算视差图</span></span><br><span class="line">disparity = stereo.compute(img_left, img_right)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化显示</span></span><br><span class="line">disparity = cv2.normalize(disparity, <span class="literal">None</span>, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX).astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="总结-1">总结</h2>
+<h3 id="边缘提取算法对比">边缘提取算法对比</h3>
+<table>
+<thead>
+<tr class="header">
+<th>算法</th>
+<th>抗噪性</th>
+<th>边缘定位</th>
+<th>计算复杂度</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Canny</td>
+<td>高</td>
+<td>高</td>
+<td>中</td>
+<td>高质量边缘检测</td>
+</tr>
+<tr class="even">
+<td>Roberts</td>
+<td>低</td>
+<td>低</td>
+<td>低</td>
+<td>简单图像</td>
+</tr>
+<tr class="odd">
+<td>Sobel</td>
+<td>中</td>
+<td>中</td>
+<td>低</td>
+<td>水平/垂直边缘</td>
+</tr>
+<tr class="even">
+<td>Prewitt</td>
+<td>低</td>
+<td>低</td>
+<td>低</td>
+<td>简单图像</td>
+</tr>
+<tr class="odd">
+<td>Hessian</td>
+<td>低</td>
+<td>高</td>
+<td>高</td>
+<td>线状结构</td>
+</tr>
+<tr class="even">
+<td>Haar</td>
+<td>中</td>
+<td>低</td>
+<td>低</td>
+<td>目标检测</td>
+</tr>
+<tr class="odd">
+<td>Laplacian</td>
+<td>低</td>
+<td>中</td>
+<td>低</td>
+<td>简单图像</td>
+</tr>
+<tr class="even">
+<td>Scharr</td>
+<td>中</td>
+<td>高</td>
+<td>低</td>
+<td>高精度边缘</td>
+</tr>
+</tbody>
+</table>
+<h3 id="相机模型要点">相机模型要点</h3>
+<ul>
+<li><strong>小孔成像</strong>：理想模型，简单但不实用。</li>
+<li><strong>相机模型</strong>：考虑内参外参，适合精确建模。</li>
+<li><strong>镜头畸变</strong>：校正非理想透镜，广角镜头必备。</li>
+<li><strong>透视变换</strong>：平面视角变换，适合校正和拼接。</li>
+<li><strong>鱼眼模型</strong>：超广角成像，需复杂校正。</li>
+<li><strong>立体视觉</strong>：深度计算，适合 3D 重建。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cvlearning/" rel="tag"># cvlearning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/" rel="prev" title="blog搭建(github page、hexo、next)">
+                  <i class="fa fa-angle-left"></i> blog搭建(github page、hexo、next)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/03/7.28-8.3%E5%91%A8%E8%AE%B0/" rel="next" title="7.28-8.3周记">
+                  7.28-8.3周记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liiesXt2EPFXkAtc","client_secret":"4d43e0d01e999f2fcd97dba54e54db2f2dbee63a","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b668b3a1c6808056ed091ab63f72c063"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

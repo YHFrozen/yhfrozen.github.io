@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="blog搭建(github page、hexo、next)">
+<meta property="og:url" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/ssh-key.png">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/ssh-pub.png">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/settings.png">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/verify.png">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/ALI.png">
+<meta property="og:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/dns.png">
+<meta property="article:published_time" content="2024-11-17T04:07:50.000Z">
+<meta property="article:modified_time" content="2025-08-03T16:40:51.444Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="技术杂谈">
+<meta property="article:tag" content="Bug Report">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/images/blog-building/ssh-key.png">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/","path":"2024/11/17/blog搭建-github-page、hexo、next/","title":"blog搭建(github page、hexo、next)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>blog搭建(github page、hexo、next) | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo"><span class="nav-number">1.</span> <span class="nav-text">hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEssh-key"><span class="nav-number">1.1.</span> <span class="nav-text">配置ssh key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#step1.%E6%A3%80%E6%9F%A5%E4%B8%BB%E6%9C%BA%E6%98%AF%E5%90%A6%E5%B7%B2%E6%9C%89ssh-key"><span class="nav-number">1.1.1.</span> <span class="nav-text">step1.检查主机是否已有ssh key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#step2.%E7%94%9F%E6%88%90ssh-key"><span class="nav-number">1.1.2.</span> <span class="nav-text">step2.生成ssh key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#step3.%E8%8E%B7%E5%8F%96ssh%E5%85%AC%E9%92%A5%E5%86%85%E5%AE%B9id_rsa.pub"><span class="nav-number">1.1.3.</span> <span class="nav-text">step3.获取ssh公钥内容(id_rsa.pub)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#step4.github%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5"><span class="nav-number">1.1.4.</span> <span class="nav-text">step4.Github上添加公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#step5.%E9%AA%8C%E8%AF%81"><span class="nav-number">1.1.5.</span> <span class="nav-text">step5.验证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo%E6%97%B6%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">安装Hexo时需要注意的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%99"><span class="nav-number">1.3.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#github"><span class="nav-number">1.5.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hexo%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86"><span class="nav-number">1.6.</span> <span class="nav-text">hexo常见指令与知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E6%A1%A3"><span class="nav-number">1.6.1.</span> <span class="nav-text">新建文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.6.2.</span> <span class="nav-text">新建页面</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">分类和标签</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E"><span class="nav-number">1.6.3.</span> <span class="nav-text">关于</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">1.6.4.</span> <span class="nav-text">常用指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next"><span class="nav-number">2.</span> <span class="nav-text">Next</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">评论系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#style"><span class="nav-number">2.1.</span> <span class="nav-text">style</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%B4%AD%E4%B9%B0%E4%B8%8E%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">域名购买与设置</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2024/11/17/blog%E6%90%AD%E5%BB%BA-github-page%E3%80%81hexo%E3%80%81next/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="blog搭建(github page、hexo、next) | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          blog搭建(github page、hexo、next)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-17 12:07:50" itemprop="dateCreated datePublished" datetime="2024-11-17T12:07:50+08:00">2024-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-04 00:40:51" itemprop="dateModified" datetime="2025-08-04T00:40:51+08:00">2025-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">应用技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<p>最近花了不少时间建立了自己的个人blog网站，整个过程也遇到了不少麻烦，所以写一篇blog记录一下我建立blog的全过程。事先说明我是在windows11系统上搭建的。</p>
+<h3 id="hexo">hexo</h3>
+<p>推荐可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">hexo官方文档</a>来下载配置。对于hexo,首先需要配置<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nodejs</a>(放的是windows的推荐下载链接，linux、macOS的链接在hexo官方文档里有显示)和<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">git</a>，这些网上都会有详细的教程而且没有什么bug，所以就不详细写了(当然不是因为博主已经忘记了自己是怎么安装的了啊)，对于git的安装有一篇推荐的<a target="_blank" rel="noopener" href="https://blog.csdn.net/mukes/article/details/115693833">文档</a>. 当然安装好git之后还不够，因为我们的网站是要托管在github上的。如果你没有github账号，请你注册一个。之后我们要把自己电脑的ssh key配置到github上，这样我们就可以把本地的仓库提交到github上了。</p>
+<h4 id="配置ssh-key">配置ssh key</h4>
+<p>(以下操作最好在git bash中运行，因为cmd、powershell可能无法识别你的git命令)</p>
+<h5 id="step1.检查主机是否已有ssh-key">step1.检查主机是否已有ssh key</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ls</span><br><span class="line">//看看是否存在id_rsa和id_rsa.pub文件，当然你也可能跟我一样是id_ed25519</span><br></pre></td></tr></table></figure>
+<p>如下图所示即为已存在ssh key <img src="images/blog-building/ssh-key.png" alt=""> 如果存在，直接跳到step3</p>
+<h5 id="step2.生成ssh-key">step2.生成ssh key</h5>
+<p>如果不存在ssh key，执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxx@xxx.com&quot;</span><br><span class="line">//填你自己注册github的邮箱</span><br></pre></td></tr></table></figure>
+<h5 id="step3.获取ssh公钥内容id_rsa.pub">step3.获取ssh公钥内容(id_rsa.pub)</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">cat id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>当然你直接去到C:.ssh下面用记事本之类的打开文件也可以。</p>
+<p>如下图所示，复制内容： <img src="images/blog-building/ssh-pub.png" alt="alt text" /></p>
+<h5 id="step4.github上添加公钥">step4.Github上添加公钥</h5>
+<p>进入settings <img src="images/blog-building/settings.png" alt="alt text" /> 找到SSH and GPG keys，然后点击New SSH key，把刚才的内容复制上去就好了。</p>
+<h5 id="step5.验证">step5.验证</h5>
+<p>执行以下命令： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure> 显示如下命令即为设置成功： <img src="images/blog-building/verify.png" alt="alt text" /></p>
+<h4 id="安装hexo时需要注意的问题">安装Hexo时需要注意的问题</h4>
+<p>(以下的操作推荐可以在vscode中打开hexo的文件夹，使用vscode的终端进行配置，当然你用cmd、powershell也不会有任何问题) 官方文档所给出的安装步骤已经十分详细，但要注意的是在安装Hexo之前最好先给npm换源(nodejs的安装似乎也会出现类似的情况，换源就好了)，否则安装可能会出一些奇怪的问题，比如说一直转圈的杠杠。</p>
+<p>换源执行以下命令： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure></p>
+<p>之后应该就没什么问题了。</p>
+<h4 id="建站">建站</h4>
+<p>依旧还是说文档很全，当你执行完<code>npm install</code>的命令后，你的网站就已经搭建好了，之后的工作就是去美化你的网站。当然你可以先看一下hexo给大家提供的默认网站的样子。 执行以下操作： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure> 打开<code>http://localhost:4000/</code>你就可以看到当前的网站了，因为我没有保存网站的图片所以就不放了。</p>
+<h4 id="配置">配置</h4>
+<p>打开根目录(也就是你hexo下载的那个文件夹)，找到_config.yml文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration</span><br><span class="line">## Docs: https://hexo.io/docs/configuration.html</span><br><span class="line">## Source: https://github.com/hexojs/hexo/</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: 言出法随的blog</span><br><span class="line">subtitle: &#x27;记一记每日生活和学习的感想唔&#x27;</span><br><span class="line">description: &#x27;每一个不曾起舞的日子，都是对生命的辜负&#x27;</span><br><span class="line">keywords: Frost,dailylife</span><br><span class="line">author: YHFrozen</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: http://yhfrozen.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
+<p>其中<code>title</code>就是blog的名称，<code>subtitle</code>则是对blog的简短介绍，<code>description</code>可以写自己的座右铭，<code>key words</code>有点类似QQ的标签，<code>author</code>就是你的昵称，<code>language</code>选择<code>zh-CN</code>，<code>timezone</code>选择<code>'Asia/Shanghai'</code>，<code>url</code>就写自己的<code>xxx.github.io</code>.</p>
+<h4 id="github">github</h4>
+<p>接下来就是该如何把自己的blog托管在github page上面。你当然可以先<code>hexo clean&amp;&amp;hexo g</code>，把生成的<code>public</code>文件夹自己手动push到github上。显然这比较麻烦。幸运的是hexo提供了自动化的工具，你只需要输入<code>hexo d</code>就可以自动帮你把<code>public</code>文件夹上传到github上。 首先我们需要安装这个工具。 安装插件<code>hexo-deployer-git</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure> 然后再_config.yml中找到<code>deploy</code>字段，更改如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:YHFrozen/yhfrozen.github.io.git \\放ssh地址，不要http</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure> 现在只需要一行命令就可以帮你自动上传了 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo d -g # or hexo g -d</span><br></pre></td></tr></table></figure></p>
+<h4 id="hexo常见指令与知识">hexo常见指令与知识</h4>
+<h5 id="新建文档">新建文档</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new #postname</span><br></pre></td></tr></table></figure>
+<p>无需后缀名，hexo会自动在source/_posts下生成相应的<code>.md</code>文档。 例如： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;welcome to my blog&quot; //如果有空格或特殊字符需要加上双引号</span><br></pre></td></tr></table></figure></p>
+<h5 id="新建页面">新建页面</h5>
+<p>hexo 支持建立一些页面，同时也支持对文章进行分类和标签，分类和标签信息都存储在<code>front-matter</code>中。</p>
+<h6 id="分类和标签">分类和标签</h6>
+<p>hexo提供了<code>tags</code>和<code>categories</code>两种页面(当然远不止这两种)，它们都是如下的结构： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">categories: #分类</span><br><span class="line">- category1</span><br><span class="line">- category2</span><br><span class="line">#...</span><br><span class="line">tags: #标签</span><br><span class="line">- tag1</span><br><span class="line">- tag2</span><br><span class="line">#...</span><br></pre></td></tr></table></figure> 它们的区别在于<code>categories</code>指的是category1下的category2，是严格的父子关系；而<code>tags</code>指的是既是tag1又是tag2，是并列关系。</p>
+<p>你可以通过如下指令来建立页面： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories&amp;&amp;hexo new page tags</span><br></pre></td></tr></table></figure> 在source/下会生成相应的文件夹。以<code>tags</code>为例，打开文件夹后会有一个<code>index.md</code>文档，<code>title</code>可以改成你想要的名称，然后在<code>front-matter</code>中添加<code>type: "tags"</code>,正文留空，就完成了创建。</p>
+<h5 id="关于">关于</h5>
+<p>同样你可以制作<code>about</code>页面，在前面的基础上在<code>index.md</code>中添加正文部分即可。</p>
+<h5 id="常用指令">常用指令</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generater</span><br></pre></td></tr></table></figure>
+<p>生成静态文件，可以简写为<code>hexo g</code>，这是更新网站的关键步骤之一。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>部署到github上，可以简写为<code>hexo d</code>，一般和<code>hexo g</code>连用，写成<code>hexo d -g</code>or<code>hexo g -d</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>启动本地服务器，默认网址是<code>http://localhost:4000/</code>，可以简写为<code>hexo s</code>，你可以把它理解为预览。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<p>清除缓存文件(<code>db.json</code>)和已生成的静态文件 (<code>public</code>)。一般在<code>hexo d -g</code>之前都要执行这个命令(<code>hexo s</code>不需要)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft #postname</span><br></pre></td></tr></table></figure>
+<p>有的时候你要更新一些文章，但其中一部分还没有做完,所以你就最好在写文章前就把它设置成<code>draft</code>,也就是草稿。它的原理是新文章将建立在 <code>source/_drafts</code> 目录下，因此 <code>hexo generate</code> 并不会将其编译到 <code>public</code> 目录下，所以 <code>hexo deploy</code>也不会将其部署到 GitHub。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo S --draft</span><br></pre></td></tr></table></figure> 本机预览草稿</p>
+<h3 id="next">Next</h3>
+<p>next的安装推荐参考<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/getting-started/">官方文档</a>，这里就不说了，因为我没有遇到什么bug。</p>
+<h5 id="配置-1">配置</h5>
+<p>首先打开<code>_config.yml</code>，找到<code>theme</code>字段，把<code>landscape</code>改成<code>next</code>。 之后就是关于<code>_config.next.yml</code>的配置，推荐参考<a target="_blank" rel="noopener" href="https://shwstone.cn/2022/07/26/hexo-next%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/?highlight=he">shwstone</a>大佬的blog。</p>
+<p>当然由于next的更新迭代，有一些blog的功能在新版下已经变成了其他样子，这个就靠大家自己在网上找找了。</p>
+<h6 id="评论系统">评论系统</h6>
+<p>我这里只单独说一下评论系统，我用的是gitalk，基于github page搭建的,其余的比如说twikoo之类最近比较火的评论系统大多是基于verel部署的，和github page不太搭。 <a target="_blank" rel="noopener" href="https://blog.csdn.net/a171232886/article/details/121206824">gitalk的推荐下载</a></p>
+<h4 id="style">style</h4>
+<p>有的时候你会发现next给出的一些模块的颜色、字体之类的你不太满意，这个时候你就需要自己去微调。在<code>_config.next.yml</code>下找到<code>custom_file_path</code>字段，将<code>style: source/_data/styles.styl</code>取消注释并建立相应的<code>styles.styl</code>文件。在这个文件里面你需要运用css去编写。例如设置背景： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line"> 	background:url(/images/background.jpg);// 设定背景图片,images同处于source文件夹下</span><br><span class="line"> 	background-repeat: no-repeat;// 设定背景图片非重复填充</span><br><span class="line">          background-attachment:fixed;// 设置背景图片不随页面滚动</span><br><span class="line">          background-position:50% 50%;// 设置背景图片位置</span><br><span class="line">	background-size: cover// 设置保持图像的纵横比并将图像缩放成将完全覆盖背景定位区域的最小大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 这就是完全的自定义了，你可以在网站中打开dev tools寻找你想要更改的元素。有一点需要注意的是next似乎给一些元素设置了标签属性，比如<code>.header</code>的颜色的设置的时候就要和下面一样： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 页面头样式属性</span><br><span class="line">.header &#123;</span><br><span class="line">  // 也可以同时定义背景色</span><br><span class="line">  background-color: #800080 none repeat scroll !important;  </span><br><span class="line">  // 透明度</span><br><span class="line">  opacity: 0.85;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 当然其他的一些元素就不用加<code>none repeat scroll !important</code>具体的原因是因为不同选择器的优先级不同，<code>!important</code>会设置成强制优先。</p>
+<h3 id="域名购买与设置">域名购买与设置</h3>
+<p>对于某些人来说，就比如我，会觉得<code>.github.io</code>不符合胃口，就是想要拥有一个自己的域名。这里记录一下我的购买流程。首先我是在<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/?utm_content=se_1018235647">阿里云</a>上购买的，先登录，然后才可以查询域名，进入购买页面。 之后要创建自己的信息模板，需要邮箱、身份证信息。 <img src="images/blog-building/ALI.png" alt="alt text" /> 购买注册之后进行DNS解析(在控制台界面中)，点击云解析DNS， <img src="images/blog-building/dns.png" alt="alt text" /> 点击进入权威域名解析，在操作中选择解析设置，选择第三条(旁边会有提示，A、AAAA、CNAME,选择CNAME),不要选IPv4和IPv6，然后选择www.和@,在记录值中填写你现在的github.io网址。</p>
+<p>打开github中的blog仓库，进入Settings选项，点击进入page页面，在最下面的Custom domin中填写你解析好的域名，比如我的就是<code>yhfrozen.fyi</code>，勾选Enforce https项，一分钟左右(可能更少)github会提示你注册成功，这个时候你就真正拥有自己的网站了。 但要注意的是此时你的网站依然托管在github上，也就是说你依旧需要魔法才能登上。如果你想把它搬到内网，你就需要更换国内的服务器，这需要向当地政府做ICP备案.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" rel="tag"># 技术杂谈</a>
+              <a href="/tags/Bug-Report/" rel="tag"># Bug Report</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/08/%E5%B7%A5%E7%A8%8B%E4%BC%A6%E7%90%86%E5%A4%8D%E4%B9%A0/" rel="prev" title="工程伦理复习">
+                  <i class="fa fa-angle-left"></i> 工程伦理复习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E4%BC%A0%E7%BB%9F%E7%AF%87/" rel="next" title="计算机视觉(传统篇)">
+                  计算机视觉(传统篇) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liiesXt2EPFXkAtc","client_secret":"4d43e0d01e999f2fcd97dba54e54db2f2dbee63a","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"58adb73375b73eeca9b032cc5c49057f"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
