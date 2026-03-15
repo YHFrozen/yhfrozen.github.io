@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making">
+<meta property="og:url" content="http://yhfrozen.github.io/2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-12T15:01:20.000Z">
+<meta property="article:modified_time" content="2026-03-15T06:46:09.220Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="Data Fetching">
+<meta property="article:tag" content="论文阅读">
+<meta property="article:tag" content="SMT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/","path":"2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/","title":"PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-your-take-away-message-from-this-paper"><span class="nav-number">1.</span> <span class="nav-text">(1)What is your take-away message from this paper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-the-motivation-for-this-work-both-people-problem-and-technical-problem-and-its-distillation-into-a-research-question-why-doesnt-the-people-problem-have-a-trivial-solution-what-are-the-previous-solutions-and-why-are-they-inadequate"><span class="nav-number">2.</span> <span class="nav-text">(2)What is the motivation for this work (both people problem and technical problem), and its distillation into a research question? Why doesn’t the people problem have a trivial solution? What are the previous solutions and why are they inadequate?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#motivation"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#background"><span class="nav-number">2.2.</span> <span class="nav-text">Background:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-the-proposed-solution-hypothesis-idea-design-why-is-it-believed-it-will-work-how-does-it-represent-an-improvement-how-is-the-solution-achieved"><span class="nav-number">3.</span> <span class="nav-text">(3)What is the proposed solution (hypothesis, idea, design)? Why is it believed it will work? How does it represent an improvement? How is the solution achieved?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%8F%96%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%90%8C%E8%B4%A8%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">预取中的时间同质性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8Csmt%E7%BA%BF%E7%A8%8B%E9%97%A8%E6%8E%A7%E7%AD%96%E7%95%A5"><span class="nav-number">3.2.</span> <span class="nav-text">获取优先级和SMT线程门控策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E6%9C%89bandit%E5%AF%B9%E4%BA%8E%E5%BE%AE%E6%9E%B6%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">3.3.</span> <span class="nav-text">原有Bandit对于微架构的修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-the-authors-evaluation-of-the-solution-what-logic-argument-evidence-artifacts-e.g.-a-proof-of-concept-system-or-experiments-are-presented-in-support-of-the-idea"><span class="nav-number">4.</span> <span class="nav-text">(4)What is the author’s evaluation of the solution? What logic, argument, evidence, artifacts (e.g., a proof-of-concept system), or experiments are presented in support of the idea?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%8F%96"><span class="nav-number">4.0.1.</span> <span class="nav-text">数据预取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smt"><span class="nav-number">4.0.2.</span> <span class="nav-text">SMT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-your-analysis-of-the-identified-problem-idea-and-evaluation-is-this-a-good-idea-what-flaws-do-you-perceive-in-the-work-what-are-the-most-interesting-or-controversial-ideas-for-work-that-has-practical-implications-ask-whether-this-will-work-who-would-want-it-what-it-will-take-to-give-it-to-them-and-when-might-it-become-a-reality"><span class="nav-number">5.</span> <span class="nav-text">(5)What is your analysis of the identified problem, idea and evaluation? Is this a good idea? What flaws do you perceive in the work? What are the most interesting or controversial ideas? For work that has practical implications, ask whether this will work, who would want it, what it will take to give it to them, and when might it become a reality?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-are-the-papers-contributions-authors-and-your-opinion-ideas-methods-software-experimental-results-exper--imental-techniques..."><span class="nav-number">6.</span> <span class="nav-text">(6)What are the paper’s contributions (author’s and your opinion)? Ideas, methods, software, experimental results, exper- imental techniques...?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-are-future-directions-for-this-research-authors-and-yours-perhaps-driven-by-shortcomings-or-other-critiques"><span class="nav-number">7.</span> <span class="nav-text">(7)What are future directions for this research (author’s and yours, perhaps driven by shortcomings or other critiques)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-questions-are-you-left-with-what-questions-would-you-like-to-raise-in-an-open-discussion-of-the-work-review-interesting-and-controversial-points-above-what-do-you-find-difficult-to-understand-list-as-many-as-you-can."><span class="nav-number">8.</span> <span class="nav-text">(8)What questions are you left with? What questions would you like to raise in an open discussion of the work (review interesting and controversial points, above)? What do you find difficult to understand? List as many as you can.</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-12 23:01:20" itemprop="dateCreated datePublished" datetime="2026-03-12T23:01:20+08:00">2026-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-15 14:46:09" itemprop="dateModified" datetime="2026-03-15T14:46:09+08:00">2026-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">体系结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<h2 id="what-is-your-take-away-message-from-this-paper">(1)What is your take-away message from this paper</h2>
+<p>MAB轻量化的强化学习算法在微架构上的应用</p>
+<h2 id="what-is-the-motivation-for-this-work-both-people-problem-and-technical-problem-and-its-distillation-into-a-research-question-why-doesnt-the-people-problem-have-a-trivial-solution-what-are-the-previous-solutions-and-why-are-they-inadequate">(2)What is the motivation for this work (both people problem and technical problem), and its distillation into a research question? Why doesn’t the people problem have a trivial solution? What are the previous solutions and why are they inadequate?</h2>
+<h3 id="motivation">Motivation:</h3>
+<p>Use <strong>MAB</strong> to solve <strong>Data Prefetching</strong> &amp; <strong>Instruction Fetch in Simultaneous Multithreaded(SMT)</strong></p>
+<h3 id="background">Background:</h3>
+<p><strong>RL</strong>用来解决微架构中的各种决策问题</p>
+<p><strong>RL</strong> : 1 High complexity and storage overhead 2 not reusable <strong>Temporal homogenrity in the action space</strong> <strong>动作空间的时间同质性</strong> ：在一些微架构决策问题中，在给定的时间窗口内，只有动作空间的一小部分是有用的</p>
+<p><strong>先前的解决办法</strong>：在线强化学习（与Pythia对比）</p>
+<h2 id="what-is-the-proposed-solution-hypothesis-idea-design-why-is-it-believed-it-will-work-how-does-it-represent-an-improvement-how-is-the-solution-achieved">(3)What is the proposed solution (hypothesis, idea, design)? Why is it believed it will work? How does it represent an improvement? How is the solution achieved?</h2>
+<h3 id="预取中的时间同质性">预取中的时间同质性</h3>
+<p>表征预取动作空间的时间同质性需要识别程序中每个点的 最优预取动作。使用Pythia的动作作为代理，分析了两个最受欢迎的Pythia动作在10亿条指令期间的 频率。平均而言，每个应用程序中最常选择的动作占总选择的60%， 而第二常选择的动作占总动作选择的15% ，在10亿条指令期间，3%的动作空间占到了总动 作选择的75%。请注意，每个应用程序中最常选择的动作都不同。</p>
+<p>[[Pasted image 20260309201750.png]] 多臂老虎机智能体无法区分环境状态（因为本身算法就一个状态），而传统的、广泛采用的非强化学习预 取器（如步长预取器和流预取器）在一定程度上可以区分环境 状态,类比38论文进行建模。对于每一个程序都是老虎机+非强化学习预选器</p>
+<h3 id="获取优先级和smt线程门控策略">获取优先级和SMT线程门控策略</h3>
+<p>总体分为两步： 1. 基于Choi算法，分配IQ（每一个都有考虑和不考虑两种情况） 2. 用BrC ICount IQ LSQCouunt LSQ为没有达到fetch-gating的线程排序</p>
+<p>优先级：BrC ICount IQ LSQCouunt LSQ 门控策略：Choi算法（具有时序稳定性）：Hill Climbing algorithm——IQ IRF ROB设置阈值，最后用ICount确定门控的优先级</p>
+<h3 id="原有bandit对于微架构的修改">原有Bandit对于微架构的修改</h3>
+<p><strong>原有问题与解决</strong>：</p>
+<p><strong>(1)</strong> IPC作为MAB的奖励，对于IPC不同的基准测试来说，有着共同的探索常数c。总之就是量纲不一样。</p>
+<ul>
+<li>计算所有臂的平均初始奖励<span class="math inline">\(r_{avg}\)</span>并归一化，以及在算法主循环中收集每一个新<span class="math inline">\(r_{step}\)</span></li>
+</ul>
+<p><strong>(2)</strong> 当许多核心同时运 行MAB算法时，核心间干扰现象会影响bandit的探索. 比方说某个核选择了一个非常激进的臂，导致其他核心的 DRAM带宽出现饥饿，从而使其他核的IPC下降，而并非是这些核的arm选的不好。</p>
+<ul>
+<li>为了缓解多核干扰导致的错误学习，某个核心会独立地以很小概率重新进入“依次试遍所有臂”的阶段，但保留以前积累的奖励和计数统计。这样它可以在其他核心大多已经收敛、系统环境更稳定的时候，重新评估各个臂，纠正早期因干扰造成的误判。</li>
+</ul>
+<h2 id="what-is-the-authors-evaluation-of-the-solution-what-logic-argument-evidence-artifacts-e.g.-a-proof-of-concept-system-or-experiments-are-presented-in-support-of-the-idea">(4)What is the author’s evaluation of the solution? What logic, argument, evidence, artifacts (e.g., a proof-of-concept system), or experiments are presented in support of the idea?</h2>
+<p>PS实验细节没有看 #### 三种Bandit算法抉择</p>
+<p>使用调优集，比较了这三种和Pythia的IPC（min max ave），结果DUCB最好</p>
+<h4 id="数据预取">数据预取</h4>
+<p>和步长、MLOP、Bingo、Pythia（重点）进行比较 单核：结果L1步长+L2Bondit效果不错 <strong>(问题：如果是其他预取器的多级缓存组合会不会更好？)</strong>；在带宽受限下比Pythia还要更好 多核：高于其他小于Pythia，因为核心之间相互干扰</p>
+<h4 id="smt">SMT</h4>
+<p>比简单的Choi算法要更好</p>
+<h2 id="what-is-your-analysis-of-the-identified-problem-idea-and-evaluation-is-this-a-good-idea-what-flaws-do-you-perceive-in-the-work-what-are-the-most-interesting-or-controversial-ideas-for-work-that-has-practical-implications-ask-whether-this-will-work-who-would-want-it-what-it-will-take-to-give-it-to-them-and-when-might-it-become-a-reality">(5)What is your analysis of the identified problem, idea and evaluation? Is this a good idea? What flaws do you perceive in the work? What are the most interesting or controversial ideas? For work that has practical implications, ask whether this will work, who would want it, what it will take to give it to them, and when might it become a reality?</h2>
+<p>本文主要针对的问题是：RL预取器在微架构中的高开销、不可重用的问题，决定用基于DUCB的Bandit算法进行解决。 文章发现了在微架构中Data Fetching阶段的时间同质性，大大减小了模型的复杂程度。这是一个非常好的想法。 缺点1： Bandit奖励臂的设计，只参考IPC，也就是说只能单核下进行评价，而不能解决多核处理器相互干扰的问题，这导致这个架构在实际应用中其实没有什么太多作用——核心越多，效果越差. 不解决多核下奖励臂的求取问题，就不能放入实际。</p>
+<h2 id="what-are-the-papers-contributions-authors-and-your-opinion-ideas-methods-software-experimental-results-exper--imental-techniques...">(6)What are the paper’s contributions (author’s and your opinion)? Ideas, methods, software, experimental results, exper- imental techniques...?</h2>
+<p>Idea:时间同质性 SMT中将优先级策略和门控策略联合，并扩充了门控策略</p>
+<h2 id="what-are-future-directions-for-this-research-authors-and-yours-perhaps-driven-by-shortcomings-or-other-critiques">(7)What are future directions for this research (author’s and yours, perhaps driven by shortcomings or other critiques)?</h2>
+<p>多核下的Data Fetching SMT——非线性下的资源分配比例探讨</p>
+<h2 id="what-questions-are-you-left-with-what-questions-would-you-like-to-raise-in-an-open-discussion-of-the-work-review-interesting-and-controversial-points-above-what-do-you-find-difficult-to-understand-list-as-many-as-you-can.">(8)What questions are you left with? What questions would you like to raise in an open discussion of the work (review interesting and controversial points, above)? What do you find difficult to understand? List as many as you can.</h2>
+<p>SMT：为什么0.2%的平均周期比例提升能带来比Choi本身高平均2.2%的性能提高，二者之间的联系是什么，作者为什么要把这两个放在一起。我认为这是不是说明门控策略其实是没有必要的呢？</p>
+<p>SMT所用的Choi算法里有一个核心假设：各种资源之间的分配是成比例的</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Data-Fetching/" rel="tag"># Data Fetching</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag"># 论文阅读</a>
+              <a href="/tags/SMT/" rel="tag"># SMT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/03/7.28-8.3%E5%91%A8%E8%AE%B0/" rel="prev" title="7.28-8.3周记">
+                  <i class="fa fa-angle-left"></i> 7.28-8.3周记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/12/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88%EF%BC%9A%E5%AF%B9%E4%BA%8ESMT%E7%9A%84Hill-Climbing%E7%AE%97%E6%B3%95%E4%B8%8EOff-Line-Exhaustive-Learning%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/" rel="next" title="技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录">
+                  技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liiesXt2EPFXkAtc","client_secret":"4d43e0d01e999f2fcd97dba54e54db2f2dbee63a","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"e2b1af32c28e17078bca0176a6ccffee"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

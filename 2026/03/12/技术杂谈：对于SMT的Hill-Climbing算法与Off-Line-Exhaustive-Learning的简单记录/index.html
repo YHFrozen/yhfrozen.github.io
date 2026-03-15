@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yhfrozen.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录">
+<meta property="og:url" content="http://yhfrozen.github.io/2026/03/12/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88%EF%BC%9A%E5%AF%B9%E4%BA%8ESMT%E7%9A%84Hill-Climbing%E7%AE%97%E6%B3%95%E4%B8%8EOff-Line-Exhaustive-Learning%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="言出法随的blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-12T15:05:27.000Z">
+<meta property="article:modified_time" content="2026-03-15T06:46:09.220Z">
+<meta property="article:author" content="YHFrozen">
+<meta property="article:tag" content="技术杂谈">
+<meta property="article:tag" content="SMT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yhfrozen.github.io/2026/03/12/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88%EF%BC%9A%E5%AF%B9%E4%BA%8ESMT%E7%9A%84Hill-Climbing%E7%AE%97%E6%B3%95%E4%B8%8EOff-Line-Exhaustive-Learning%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yhfrozen.github.io/2026/03/12/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88%EF%BC%9A%E5%AF%B9%E4%BA%8ESMT%E7%9A%84Hill-Climbing%E7%AE%97%E6%B3%95%E4%B8%8EOff-Line-Exhaustive-Learning%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/","path":"2026/03/12/技术杂谈：对于SMT的Hill-Climbing算法与Off-Line-Exhaustive-Learning的简单记录/","title":"技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录 | 言出法随的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">言出法随的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记一记每日生活和学习的感想唔</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#off-line-exhaustive-learning"><span class="nav-number">1.</span> <span class="nav-text">Off-Line Exhaustive Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E6%A0%B8%E5%BF%83"><span class="nav-number">1.0.1.</span> <span class="nav-text">方法核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%83%E5%88%86%E9%85%8D%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E8%B5%84%E6%BA%90"><span class="nav-number">1.0.3.</span> <span class="nav-text">它分配的是什么资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.0.4.</span> <span class="nav-text">参数设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%99%E4%B8%AA%E6%96%B9%E6%B3%95%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">这个方法的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.6.</span> <span class="nav-text">一句话总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hill-climbing-algorithm"><span class="nav-number">2.</span> <span class="nav-text">Hill-Climbing Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anchor_partition"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. anchor_partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trial_partition"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. trial_partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delta"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. Delta</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%83%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text">它怎么运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E6%8C%89-epoch-%E6%94%B6%E9%9B%86%E6%80%A7%E8%83%BD"><span class="nav-number">2.1.1.</span> <span class="nav-text">第一步：按 epoch 收集性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E4%B8%80%E8%BD%AE-round-%E5%86%85%E4%BE%9D%E6%AC%A1%E8%AF%95%E6%8E%A2%E6%AF%8F%E4%B8%AA%E6%96%B9%E5%90%91"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：一轮 round 内，依次试探每个方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9D%9F%E5%90%8E%E9%80%89%E6%9C%80%E5%A5%BD%E6%96%B9%E5%90%91"><span class="nav-number">2.3.</span> <span class="nav-text">第三步：一轮结束后，选最好方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E7%BB%A7%E7%BB%AD%E4%B8%8B%E4%B8%80%E8%BD%AE"><span class="nav-number">2.4.</span> <span class="nav-text">第四步：继续下一轮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%83%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">2.5.</span> <span class="nav-text">它的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E5%B0%91"><span class="nav-number">2.5.1.</span> <span class="nav-text">1. 采样少</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">2.5.2.</span> <span class="nav-text">2. 直接优化性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%88%E6%8E%A5%E8%BF%91%E7%90%86%E6%83%B3%E4%B8%8A%E7%95%8C"><span class="nav-number">2.5.3.</span> <span class="nav-text">3. 很接近理想上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%83%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">2.6.</span> <span class="nav-text">它的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%AD%A6%E4%B9%A0%E6%97%B6%E9%97%B4"><span class="nav-number">2.6.1.</span> <span class="nav-text">1. 有学习时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%8D%A1%E5%9C%A8%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98"><span class="nav-number">2.6.2.</span> <span class="nav-text">2. 可能卡在局部最优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E5%8F%97-inter-epoch-jitter-%E5%B9%B2%E6%89%B0"><span class="nav-number">2.6.3.</span> <span class="nav-text">3. 会受 inter-epoch jitter 干扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%9C%BA%E5%88%B6%E5%88%86%E4%B8%A4%E6%AD%A5"><span class="nav-number">2.6.4.</span> <span class="nav-text">论文中的机制分两步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%88%A4%E6%96%AD%E7%BA%BF%E7%A8%8B%E6%98%AF%E5%90%A6%E8%A2%AB%E8%8E%B7%E5%8F%96%E9%97%A8%E6%8E%A7fetch-lock"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">1️⃣ 先判断线程是否被获取门控（fetch-lock）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%B2%A1%E6%9C%89%E8%A2%AB%E9%97%A8%E6%8E%A7%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E5%86%B3%E5%AE%9A%E8%B0%81%E5%85%88%E5%8F%96%E6%8C%87"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">2️⃣ 在“没有被门控的线程”之间决定谁先取指</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A0%E6%AD%A4%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%E6%98%AF"><span class="nav-number">2.6.5.</span> <span class="nav-text">因此完整流程是</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YHFrozen"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">YHFrozen</p>
+  <div class="site-description" itemprop="description">每一个不曾起舞的日子，都是对生命的辜负</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YHFrozen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YHFrozen" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhfrozen.github.io/2026/03/12/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88%EF%BC%9A%E5%AF%B9%E4%BA%8ESMT%E7%9A%84Hill-Climbing%E7%AE%97%E6%B3%95%E4%B8%8EOff-Line-Exhaustive-Learning%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="YHFrozen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="言出法随的blog">
+      <meta itemprop="description" content="每一个不曾起舞的日子，都是对生命的辜负">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录 | 言出法随的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          技术杂谈：对于SMT的Hill-Climbing算法与Off-Line Exhaustive Learning的简单记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-12 23:05:27" itemprop="dateCreated datePublished" datetime="2026-03-12T23:05:27+08:00">2026-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-15 14:46:09" itemprop="dateModified" datetime="2026-03-15T14:46:09+08:00">2026-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">体系结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div>
+
+</div>
+<span id="more"></span>
+<h1 id="off-line-exhaustive-learning">Off-Line Exhaustive Learning</h1>
+<blockquote>
+<p>如果我们能在每个 epoch 都“试遍所有资源划分方案”，并且总能选到表现最好的那个，那么 SMT 资源分配最多能好到什么程度？</p>
+</blockquote>
+<h3 id="方法核心">方法核心</h3>
+<p>论文把 SMT 的执行划分成一连串固定长度的 <strong>epoch</strong>。在每个 epoch 里，资源分配机制会给同时运行的线程分配共享硬件资源的份额；线程只能使用自己分到的那部分资源，因此这是按 epoch 进行的资源分区。</p>
+<ul>
+<li>Offline Exhaustive Learning：直接利用<strong>当前这个 epoch</strong> 的性能反馈来选当前 epoch 最优方案。</li>
+</ul>
+<h3 id="具体步骤">具体步骤</h3>
+<p>对每个 epoch，它会这样做：</p>
+<ol type="1">
+<li><p><strong>在 epoch 开始时保存机器状态</strong>（checkpoint）。论文实现里会保存寄存器文件、流水线寄存器、分支预测器、cache、主存等状态。</p></li>
+<li><p><strong>把所有可能的资源划分方案都跑一遍</strong>。也就是从同一个 checkpoint 出发，对当前 epoch 逐个尝试不同 partition。</p></li>
+<li><p><strong>测量每种划分的性能</strong>，然后选出性能最高的那一种。论文这里用的是 <strong>average weighted IPC</strong> 作为选优指标。</p></li>
+<li><p><strong>只把最佳试验对应的执行时间计入真实运行时间</strong>，其他所有“试错”的开销全部忽略；然后进入下一个 epoch，重复这个过程。</p></li>
+</ol>
+<p>所以它其实不是一个现实可部署的硬件算法，而是一个<strong>“带上帝视角的理想最优近似”</strong>，专门用来评估学习型资源分配的潜力。论文也明确说了，这种离线学习在真实机器上并不实际。</p>
+<h3 id="它分配的是什么资源">它分配的是什么资源</h3>
+<p>论文并不是对所有共享资源独立穷举，因为那样搜索空间太大。它做了两个简化：</p>
+<ul>
+<li><p>重点分配 <strong>整数 IQ、整数重命名寄存器、ROB</strong> 这几个关键共享结构；</p></li>
+<li><p>假设一个线程在这些资源上的占用是<strong>成比例相关</strong>的，所以只显式划分一种资源，再按比例映射到其他资源上。</p></li>
+</ul>
+<p>这样搜索空间才降下来。即便如此，穷举依然非常贵，所以论文的离线穷举实验只研究了 <strong>2 hardware contexts</strong> 的 SMT。</p>
+<h3 id="参数设置">参数设置</h3>
+<p>这部分实验里：</p>
+<ul>
+<li><p><strong>epoch 大小</strong>用的是 <strong>64K cycles</strong>；</p></li>
+<li><p>实际穷举的是 <strong>256 个整数重命名寄存器在 2 个线程之间的划分</strong>；</p></li>
+<li><p>为了省仿真时间，只尝试“每隔一个”的划分方案，所以每个 epoch 一共跑 <strong>127 次试验</strong>。</p></li>
+</ul>
+<h3 id="这个方法的意义">这个方法的意义</h3>
+<p>它的作用不是“可实现”，而是作为<strong>性能上限基准</strong>：</p>
+<ul>
+<li><p>理想离线学习相对 ICOUNT 平均提升 <strong>19.2%</strong></p></li>
+<li><p>相对 FLUSH 提升 <strong>18.0%</strong></p></li>
+<li><p>相对 DCRA 提升 <strong>7.6%</strong></p></li>
+</ul>
+<p>这说明：<strong>如果能学到每个 epoch 的最佳资源划分，SMT 资源分配确实还有明显优化空间。</strong></p>
+<h3 id="一句话总结">一句话总结</h3>
+<p><strong>Offline Exhaustive Learning = 把执行按 epoch 切开，在每个 epoch 开头从同一检查点出发穷举所有资源划分，测完性能后选当前 epoch 最优方案执行，并且忽略穷举试错成本，用它来估计学习型 SMT 资源分配的理论上限。</strong></p>
+<h1 id="hill-climbing-algorithm">Hill-Climbing Algorithm</h1>
+<p>它是论文提出的一个<strong>在线学习</strong>资源划分方法。核心思想是：</p>
+<blockquote>
+<p>不像 Offline Exhaustive Learning 那样每个 epoch 把所有划分都试完，<br />
+Hill-climbing 只在“当前最好划分”附近做少量试探，然后沿着<strong>性能上升最快的方向</strong>继续走，逐步逼近最优划分。类似于梯度下降法。</p>
+</blockquote>
+<p>有一个核心假设：各种资源之间的分配是成比例的 ## 它维护的核心量</p>
+<h3 id="anchor_partition">1. <code>anchor_partition</code></h3>
+<p>当前认为<strong>最好的资源划分</strong>。<br />
+可以理解成“当前爬山所在的位置”。</p>
+<p>一开始，<code>anchor_partition</code> 默认是<strong>均分</strong>。</p>
+<h3 id="trial_partition">2. <code>trial_partition</code></h3>
+<p>本轮为了试探坡度而临时采用的划分。<br />
+就是在 <code>anchor_partition</code> 附近，分别偏向某一个线程一点点，看性能变好还是变差。</p>
+<h3 id="delta">3. <code>Delta</code></h3>
+<p>每次试探时移动的步长。<br />
+论文里取 <strong>Delta = 4</strong>，这里指的是整数重命名寄存器移动 4 个；IQ 和 ROB 按比例一起调整。</p>
+<h2 id="它怎么运行">它怎么运行</h2>
+<p>论文把算法分成两个部分：</p>
+<ul>
+<li><p><strong>sampling sequence / round</strong>：采样阶段</p></li>
+<li><p><strong>partition selection</strong>：选方向、更新 anchor 的阶段</p></li>
+</ul>
+<h3 id="第一步按-epoch-收集性能">第一步：按 epoch 收集性能</h3>
+<p>系统还是按固定 epoch 运行，epoch 大小是 <strong>64K cycles</strong>。</p>
+<p>每个 epoch 结束时，记录这一个 epoch 在当前 <code>trial_partition</code> 下的性能。这个性能就是学习反馈。</p>
+<hr />
+<h2 id="第二步一轮-round-内依次试探每个方向">第二步：一轮 round 内，依次试探每个方向</h2>
+<p>假设有 <code>N</code> 个线程。</p>
+<p>从当前 <code>anchor_partition</code> 出发，算法不会试所有可能划分，而是只试 <strong>N 个相邻方向</strong>：</p>
+<ul>
+<li><p>第 1 个 epoch：多给线程 0 一点资源，其他线程各减一点</p></li>
+<li><p>第 2 个 epoch：多给线程 1 一点资源，其他线程各减一点</p></li>
+<li><p>…</p></li>
+<li><p>第 N 个 epoch：多给线程 N-1 一点资源，其他线程各减一点</p></li>
+</ul>
+<p>也就是说：</p>
+<blockquote>
+<p>一轮 round = 连续用 N 个 epoch，分别测试“如果把资源稍微偏向某一个线程，性能会怎样”。</p>
+</blockquote>
+<p>论文伪代码里写得很清楚：<br />
+每个 sample 都是“让一个线程从其他 <code>T-1</code> 个线程那里各拿走 <code>Delta</code> 的资源”。因此被偏向的线程一共增加 <code>Delta*(N-1)</code>，其他每个线程减少 <code>Delta</code>。</p>
+<hr />
+<h2 id="第三步一轮结束后选最好方向">第三步：一轮结束后，选最好方向</h2>
+<p>当这 <strong>N 个方向都试完</strong>后，算法比较这 N 次 sample 的性能：</p>
+<ul>
+<li><p>哪个 sample 性能最高</p></li>
+<li><p>就说明“把资源往哪个线程偏一点”是当前的<strong>正梯度方向</strong></p></li>
+</ul>
+<p>然后把 <code>anchor_partition</code> 朝这个方向移动一步。</p>
+<p>也就是：</p>
+<ul>
+<li><p>若偏向线程 k 的那个 sample 最好</p></li>
+<li><p>下一轮的 <code>anchor_partition</code> 就更新为：</p>
+<ul>
+<li><p>线程 k 多拿一点</p></li>
+<li><p>其他线程各少一点</p></li>
+</ul></li>
+</ul>
+<p>这一步就是“<strong>沿着坡往上爬</strong>”。</p>
+<hr />
+<h2 id="第四步继续下一轮">第四步：继续下一轮</h2>
+<p>更新完 <code>anchor_partition</code> 后，再围绕新的 anchor 继续试：</p>
+<ul>
+<li><p>再做一轮 N 个 epoch 的局部采样</p></li>
+<li><p>再选最好方向</p></li>
+<li><p>再移动一步</p></li>
+</ul>
+<p>如此反复，直到逼近性能峰值。</p>
+<h2 id="它的优点">它的优点</h2>
+<h3 id="采样少">1. 采样少</h3>
+<p>不需要像离线穷举那样试遍所有资源划分，只需要每轮试 <code>N</code> 个方向，所以学习时间低很多。</p>
+<h3 id="直接优化性能指标">2. 直接优化性能指标</h3>
+<p>学习反馈可以选 weighted IPC、average IPC、harmonic mean of weighted IPC。<br />
+论文指出：<strong>用什么指标学习，就最擅长优化什么指标</strong>。</p>
+<h3 id="很接近理想上界">3. 很接近理想上界</h3>
+<p>论文里，2-thread 情况下 hill-climbing 达到了 OFF-LINE 理想性能的 <strong>96.6%</strong>。</p>
+<hr />
+<h2 id="它的缺点">它的缺点</h2>
+<h3 id="有学习时间">1. 有学习时间</h3>
+<p>它不是一开始就知道最优点，所以学习过程中会用到一些非最优划分，损失部分性能。</p>
+<h3 id="可能卡在局部最优">2. 可能卡在局部最优</h3>
+<p>如果性能曲线有多个峰，hill-climbing 可能爬到一个次优峰后停住。</p>
+<h3 id="会受-inter-epoch-jitter-干扰">3. 会受 inter-epoch jitter 干扰</h3>
+<p>论文特别提到，跨 epoch 的抖动会制造“假的梯度方向”，让 hill-climber 有时走错方向。</p>
+<hr />
+<h3 id="论文中的机制分两步">论文中的机制分两步</h3>
+<h4 id="先判断线程是否被获取门控fetch-lock">1️⃣ 先判断线程是否被获取门控（fetch-lock）</h4>
+<p>系统会检查每个线程在 <strong>IQ、IRF、ROB</strong> 中的占用：</p>
+<ul>
+<li><p>如果某线程 <strong>超过其 partition limit</strong></p></li>
+<li><p>就对该线程 <strong>fetch-lock（获取门控）</strong></p></li>
+<li><p>该线程在这一周期 <strong>不能再取指</strong></p></li>
+</ul>
+<p>这一步是 <strong>资源分区机制</strong>控制的。</p>
+<hr />
+<h4 id="在没有被门控的线程之间决定谁先取指">2️⃣ 在“没有被门控的线程”之间决定谁先取指</h4>
+<p>如果有多个线程 <strong>仍然允许 fetch</strong>，就需要一个 <strong>fetch policy</strong> 决定优先级。</p>
+<p>论文这里<strong>直接沿用 ICOUNT</strong>：</p>
+<blockquote>
+<p>在未被 fetch-lock 的线程中，使用 <strong>ICOUNT fetch policy</strong> 决定取指优先级。</p>
+</blockquote>
+<p>ICOUNT 的规则是：</p>
+<ul>
+<li><p>比较各线程 <strong>in-flight instruction 数量</strong></p></li>
+<li><p><strong>谁在流水线里的指令更少，就优先 fetch 谁</strong></p></li>
+</ul>
+<hr />
+<h3 id="因此完整流程是">因此完整流程是</h3>
+<p>每个 cycle：</p>
+<ol type="1">
+<li><p>检查每个线程是否超过<br />
+<strong>IQ / IRF / ROB partition limit</strong></p></li>
+<li><p>如果超过 → <strong>fetch-lock</strong></p></li>
+<li><p>在剩余 <strong>未被门控的线程</strong> 中</p></li>
+<li><p>用 <strong>ICOUNT</strong> 决定 fetch 顺序</p></li>
+</ol>
+<h2 id="总结">总结</h2>
+<p><strong>Hill-climbing algorithm 是一种基于 epoch 的在线 SMT 资源划分学习方法。它维护当前最优划分 <code>anchor_partition</code>，并在每一轮中围绕该划分对每个线程分别做一次小幅资源倾斜试探，收集这 N 个相邻方向的性能反馈。轮结束后，选择性能提升最大的方向作为正梯度方向，并将 <code>anchor_partition</code> 朝该方向移动一步。通过反复执行“局部采样—梯度判断—更新划分”，算法逐步逼近 epoch 资源划分空间中的性能峰值。相比离线穷举，它采样更少、开销更低，但可能受学习时间、局部最优和 epoch 间抖动影响。</strong></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" rel="tag"># 技术杂谈</a>
+              <a href="/tags/SMT/" rel="tag"># SMT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/12/PaperReading(1)-Micro-armed-Bandit-for-Microarchitecture-Decision-Making/" rel="prev" title="PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making">
+                  <i class="fa fa-angle-left"></i> PaperReading:Micro-armed Bandit for Microarchitecture Decision-Making
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/15/Data-Fetching%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%A0%B8%E5%B9%B2%E6%89%B0%E3%80%81/" rel="next" title="Data Fetching中的多核干扰、">
+                  Data Fetching中的多核干扰、 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YHFrozen</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"YHFrozen","repo":"yhfrozen.github.io","client_id":"Ov23liiesXt2EPFXkAtc","client_secret":"4d43e0d01e999f2fcd97dba54e54db2f2dbee63a","admin_user":"YHFrozen","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"67c76f5f56971ebfacc78b27c95b77b0"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
